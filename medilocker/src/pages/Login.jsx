@@ -63,7 +63,24 @@ const Login = () => {
             });
     }
 
-    
+    async function show() {
+        var accounts = await window.ethereum.request({
+            method: "eth_requestAccounts",
+        });
+        var currentaddress = accounts[0];
+
+        const web3 = new Web3(window.ethereum);
+        const mycontract = new web3.eth.Contract(
+            contract["abi"],
+            contract["networks"]["5777"]["address"]
+        );
+
+        web3.eth.getBlock(blockNumber, function (block) {
+            console.log(block.hash);
+        })
+    }
+
+
 
     return (
         <div className="login-container bg-gradient-to-r from-cyan-500 to-blue-500 via-teal-200 ">
@@ -110,7 +127,13 @@ const Login = () => {
                     value="Log In"
                     onClick={login}
                 />
-                
+                <input
+                    type="button"
+                    className="btn"
+                    value="Show"
+                    onClick={show}
+                />
+
                 <p style={{ textAlign: "right" }}>Don't have an account?
                     <Link style={{ marginLeft: "4px", color: "black", textDecoration: "underline" }} to='/signup'>Sign Up.</Link>
                 </p>
