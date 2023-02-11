@@ -1,6 +1,18 @@
-.auth-form-container, .login-form, .register-form {
+.parent-form{
+  display: flex;
+  justify-content: center;
+}
+.auth-form-container{
     display: flex;
     flex-direction: column;
+    width: 400px;
+    background-color: rgb(187, 185, 185);
+  }
+  h2{
+    color: white;
+  }
+  label{
+    color: white;
   }
   
   @media screen and (min-width: 600px) {
@@ -27,14 +39,31 @@
   button {
     border: none;
     background-color: white;
-    padding: 20px;
+    padding: 10px;
     border-radius: 10px;
     cursor: pointer;
-    color: #7439db;
+    color: white;
   }
-  
+  .log-btn{
+    background-color: #759EBD;
+    color: white;
+    width: 100%;
+    margin-top: 30px;
+  }
+  .log-btn:hover{
+    background-color: #678fad;
+    color: white;
+    width: 100%;
+    margin-top: 30px;
+  }
   .link-btn {
     background: none;
     color: white;
     text-decoration: underline;
+  }
+  a{
+    margin-top: 10px;
+  }
+  a:hover{
+    color: white;
   }
