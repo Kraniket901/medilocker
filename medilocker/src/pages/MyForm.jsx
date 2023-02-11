@@ -112,16 +112,16 @@ const MyForm = () => {
   };
 
   return (
-    <div className={styles.appcontainer}>
+    <div style={ {display: "flex", flexDirection:"column", gap: "10px", padding: "1rem"}}>
       <form onSubmit={handleEditFormSubmit}>
-        <table>
+        <table style={{   borderCollapse: "collapse", width: "10%"}}>
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Address</th>
-              <th>Phone Number</th>
-              <th>Email</th>
-              <th>Actions</th>
+              <th className={styles.thh}>Name</th>
+              <th className={styles.thh}>Address</th>
+              <th className={styles.thh}>Phone Number</th>
+              <th className={styles.thh}>Email</th>
+              <th className={styles.thh}>Actions</th>
             </tr>
           </thead>
           <tbody>
