@@ -51,7 +51,7 @@ const MyProfile = (props) => {
           name="email"
           type="email"
           value={name}
-          onChange={e => setEmail(e.target.value)}
+          onChange={e => setName(e.target.value)}
           disabled={disabled}
           required />
       </label>
