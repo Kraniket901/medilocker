@@ -4,11 +4,10 @@ import { FiSettings } from 'react-icons/fi';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 
 import { Navbar, Footer, Sidebar, ThemeSettings } from './components';
-import { Home, MyProfile, Login, Signup, Orders, Calendar, Employees, Stacked, Pyramid, Customers, Kanban, Line, Area, Bar, Pie, Financial, ColorPicker, ColorMapping, Editor } from './pages';
+import { Home, MyProfile, Insurance, Login, Signup, Orders, Calendar, Employees, Stacked, Pyramid, Customers, Kanban, Line, Area, Bar, Pie, Financial, ColorPicker, ColorMapping, Editor } from './pages';
 import './App.css';
 
 import { useStateContext } from './contexts/ContextProvider';
-import MyForm from './pages/MyForm';
 
 const App = () => {
   const { setCurrentColor, setCurrentMode, currentMode, activeMenu, currentColor, themeSettings, setThemeSettings } = useStateContext();
@@ -32,12 +31,11 @@ const App = () => {
                 <Route path="/login" element={(<Login />)} />
                 <Route path="/signup" element={(<Signup />)} />
 
-                
-
                 {/* pages  */}
                 <Route path="/orders" element={<Orders />} />
                 <Route path="/employees" element={<Employees />} />
                 <Route path="/customers" element={<Customers />} />
+                <Route path="/insurance" element={<Insurance />} />
 
                 {/* apps  */}
                 <Route path="/kanban" element={<Kanban />} />
@@ -54,7 +52,6 @@ const App = () => {
                 <Route path="/color-mapping" element={<ColorMapping />} />
                 <Route path="/pyramid" element={<Pyramid />} />
                 <Route path="/stacked" element={<Stacked />} />
-                <Route path="/myform" element={<MyForm />} />
 
               </Routes>
       </BrowserRouter>

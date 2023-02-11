@@ -9,7 +9,8 @@ const Signup = () => {
         "type": "user",
         "name": "",
         "mail": "",
-        "password": ""
+        "password": "",
+        "insurance": [{}]
     });
 
     function handle(e) {
@@ -35,49 +36,49 @@ const Signup = () => {
     return (
 
         <div className="login-container bg-gradient-to-r from-cyan-500 to-blue-500 via-teal-200 ">
-      <form className="login-form backdrop-blur-lg
+            <form className="login-form backdrop-blur-lg
                [ p-8 md:p-10 lg:p-10 ]
                [ bg-gradient-to-b from-white/60 to-white/30 ]
                [ border-[1px] border-solid border-white border-opacity-30 ]
                [ shadow-black/70 shadow-2xl ]">
-        <h2 className="login-form-title">Sign Up</h2>
-        <div className="input-container">
-          <div className="input-div">
-            <div className="input-heading">
-              <i className="fas fa-user"></i>
-              <h5>Username</h5>
-            </div>
-            <input name="name" onChange={(e) => handle(e)} id="name" placeholder="Full Name" />
+                <h2 className="login-form-title">Sign Up</h2>
+                <div className="input-container">
+                    <div className="input-div">
+                        <div className="input-heading">
+                            <i className="fas fa-user"></i>
+                            <h5>Username</h5>
+                        </div>
+                        <input name="name" onChange={(e) => handle(e)} id="name" placeholder="Full Name" />
 
-          </div>
-          <div className="input-div">
-            <div className="input-heading">
-              <i className="fas fa-envelope"></i>
-              <h5>Email</h5>
-            </div>
-            <input onChange={(e) => handle(e)} type="mail" placeholder="youremail@gmail.com" id="email" name="mail" />
+                    </div>
+                    <div className="input-div">
+                        <div className="input-heading">
+                            <i className="fas fa-envelope"></i>
+                            <h5>Email</h5>
+                        </div>
+                        <input onChange={(e) => handle(e)} type="mail" placeholder="youremail@gmail.com" id="email" name="mail" />
 
 
-          </div>
-          <div className="input-div">
-            <div className="input-heading">
-              <i className="fas fa-lock"></i>
-              <h5>Password</h5>
-            </div>
-            <input onChange={(e) => handle(e)} type="password" placeholder="********" id="password" name="password" />
+                    </div>
+                    <div className="input-div">
+                        <div className="input-heading">
+                            <i className="fas fa-lock"></i>
+                            <h5>Password</h5>
+                        </div>
+                        <input onChange={(e) => handle(e)} type="password" placeholder="********" id="password" name="password" />
 
-          </div>
+                    </div>
 
+                </div>
+
+                <input type="button" value="Sign Up" className="btn" onClick={register} />
+                <p style={{ textAlign: "right" }}>Already a user?
+                    <Link style={{ marginLeft: "4px", color: "black", textDecoration: "underline" }} to='/login'>Log In.</Link>
+                </p>
+
+            </form>
         </div>
 
-        <input type="button" value="Sign Up" className="btn" onClick={register} />
-        <p style={{ textAlign: "right"}}>Already a user? 
-          <Link style={{marginLeft:"4px", color: "black", textDecoration: "underline"}} to='/login'>Log In.</Link>
-          </p>
-
-      </form>
-    </div>
-        
     )
 }
 
