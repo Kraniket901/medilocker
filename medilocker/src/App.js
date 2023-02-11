@@ -8,6 +8,7 @@ import { Home, MyProfile, Login, Signup, Orders, Calendar, Employees, Stacked, P
 import './App.css';
 
 import { useStateContext } from './contexts/ContextProvider';
+import MyForm from './pages/MyForm';
 
 const App = () => {
   const { setCurrentColor, setCurrentMode, currentMode, activeMenu, currentColor, themeSettings, setThemeSettings } = useStateContext();
@@ -53,6 +54,7 @@ const App = () => {
                 <Route path="/color-mapping" element={<ColorMapping />} />
                 <Route path="/pyramid" element={<Pyramid />} />
                 <Route path="/stacked" element={<Stacked />} />
+                <Route path="/myform" element={<MyForm />} />
 
               </Routes>
       </BrowserRouter>

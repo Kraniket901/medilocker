@@ -1,63 +1,33 @@
-import { useState, useRef } from "react";
+import React, { useState } from "react";
+import ReactDOM from "react-dom";
+import FormPage from "./FormPage";
 
-function MyForm() {
-  const [formValues, setFormValues] = useState([]);
-  const [toggle, setToggle] = useState(false);
+const Input = () => {
+  return <input placeholder="Your input here" />;
+};
 
-  const inputRef = useRef();
-  const selectRef = useRef();
+const MyForm = () => {
+  const [inputList, setInputList] = useState([]);
 
-  const handleChange = (e, index) => {
-    const values = [...formValues];
-    values[index].value = e.target.value;
-    setFormValues(values);
-  };
-
-  const handleAddField = (e) => {
-    e.preventDefault();
-    const values = [...formValues];
-    values.push({
-      label: inputRef.current.value || "label",
-      type: selectRef.current.value || "text",
-      value: "",
-    });
-    setFormValues(values);
-    setToggle(false);
-  };
-
-  const addBtnClick = (e) => {
-    e.preventDefault();
-    setToggle(true);
+  const onAddBtnClick = event => {
+    setInputList(inputList.concat(<FormPage />));
   };
 
   return (
-    <div className="App">
-      <form>
-        {!toggle ? (
-          <div className="center">
-            <button className="add-btn" onClick={addBtnClick}>
-              Add new
-            </button>
-          </div>
-        ) : (
-          <div className="dialog-box">
-            <input type="text" placeholder="label" ref={inputRef} />
-            <select ref={selectRef}>
-              <option value="text">Text</option>
-              <option value="number">Number</option>
-              <option value="email">Email</option>
-              <option value="password">Password</option>
-            </select>
-            <button className="add-btn" onClick={handleAddField}>
-              Add
-            </button>
-          </div>
-        )}
-        <button type="submit" className="submit-btn">
-          Submit
-        </button>
-      </form>
+    <div>
+      <FormPage/>
+      {inputList}
+      <div className="flex justify-center">
+      <button className="text-black" onClick={onAddBtnClick}>Add input</button>
+      {/* <button className="text-black" onClick={onDeleteBtnClick}>Delete input</button> */}
+      </div>
+      
+      <div className="py-2 text-center">
+        <button className="bg-cyan-400 text-white font-medium p-3">Submit</button>
+        </div>
     </div>
+    
   );
-}
-export default MyForm;
+};
+
+export default MyForm
