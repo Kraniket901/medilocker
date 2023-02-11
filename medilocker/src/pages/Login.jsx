@@ -3,8 +3,6 @@ import { Link, NavLink } from "react-router-dom";
 import Web3 from "web3";
 import contract from '../contracts/cruds.json';
 import { useCookies } from 'react-cookie';
-
-
 import './Login.css'
 
 const Login = () => {
@@ -41,6 +39,7 @@ const Login = () => {
                             setCookie('index', i);
                             setCookie('mail', d['mail']);
                             setCookie('name', d['name']);
+                            setCookie('password', d['password']);
                             window.location.href = "/myprofile";
                         }
                         else {
@@ -66,11 +65,7 @@ const Login = () => {
                 <input onChange={(e) => handle(e)} type="email" placeholder="youremail@gmail.com" id="email" name="mail" />
                 <label htmlFor="password">password</label>
                 <input onChange={(e) => handle(e)} type="password" placeholder="********" id="password" name="password" />
-                <input type="button" value="Log In" onClick={login} />
-                <input value={pass} onChange={(e) => setPass(e.target.value)} type="password" placeholder="********" id="password" name="password" />
-                <Link to="/myprofile">
-                <button className="log-btn" type="submit">Log In</button>
-                </Link>
+                <input className="log-btn" type="button" value="Log In" onClick={login} />
             </form>
 
             <a href="/signup">Don't have an account? Register here.</a>
