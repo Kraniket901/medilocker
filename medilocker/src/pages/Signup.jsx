@@ -63,12 +63,13 @@ const Signup = () => {
             <input onChange={(e) => handle(e)} type="password" placeholder="********" id="password" name="password" />
 
           </div>
-          <p style={{ textAlign: "right"}}>Already a user? 
-          <Link style={{marginLeft:"4px", color: "black", textDecoration: "underline"}} to='/login'>Log In.</Link>
-          </p>
+
         </div>
 
         <input type="button" value="Sign Up" className="btn" onClick={register} />
+        <p style={{ textAlign: "right"}}>Already a user? 
+          <Link style={{marginLeft:"4px", color: "black", textDecoration: "underline"}} to='/login'>Log In.</Link>
+          </p>
 
       </form>
     </div>
