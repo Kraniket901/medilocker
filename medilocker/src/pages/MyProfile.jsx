@@ -20,10 +20,20 @@ const MyProfile = () => {
     "password": password
   })
 
-  const [disabled, setDisabled] = useState(true);
+  const [disabled1, setDisabled1] = useState(true);
 
-  function handleGameClick() {
-    setDisabled(!disabled);
+  function handleGameClick1() {
+    setDisabled1(!disabled1);
+  }
+  const [disabled2, setDisabled2] = useState(true);
+
+  function handleGameClick2() {
+    setDisabled2(!disabled2);
+  }
+  const [disabled3, setDisabled3] = useState(true);
+
+  function handleGameClick3() {
+    setDisabled3(!disabled3);
   }
 
   async function save() {
@@ -74,7 +84,7 @@ const MyProfile = () => {
           <Navbar />
         </div>
         <div className="flex justify-center m-10 ">
-          <form className=" p-5 ">
+          <form className=" p-5 bg-slate-100 rounded-lg">
             <h1 className="text-center text-lg">User Profile</h1>
 
 
@@ -88,10 +98,10 @@ const MyProfile = () => {
                   type="email"
                   value={name}
                   onChange={e => setName(e.target.value)}
-                  disabled={disabled}
+                  disabled={disabled1}
                   required />
               </label>
-              <input type="button" value="✎" onClick={handleGameClick}></input>
+              <input type="button" value="✎" className="text-2xl hover:text-blue-400 cursor-pointer" onClick={handleGameClick1}></input>
             </div>
 
             <div className="py-2">
@@ -104,10 +114,10 @@ const MyProfile = () => {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  disabled={disabled}
+                  disabled={disabled2}
                   required />
               </label>
-              <input type="button" value="✎" onClick={handleGameClick}></input>
+              <input type="button" value="✎" className="text-2xl hover:text-blue-400 cursor-pointer" onClick={handleGameClick2}></input>
             </div>
 
 
@@ -121,10 +131,10 @@ const MyProfile = () => {
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  disabled={disabled}
+                  disabled={disabled3}
                   required />
               </label >
-              <input type="button" value="✎" onClick={handleGameClick}></input>
+              <input type="button" value="✎" className="text-2xl hover:text-blue-400 cursor-pointer" onClick={handleGameClick3}></input>
             </div>
 
             <div className="py-2">
