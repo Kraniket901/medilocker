@@ -68,7 +68,7 @@ const Login = () => {
                 <input className="log-btn" type="button" value="Log In" onClick={login} />
             </form>
 
-            <a href="/signup">Don't have an account? Register here.</a>
+            <a className="yo" href="/signup">Don't have an account? Register here.</a>
         </div>
         </div>
     )
