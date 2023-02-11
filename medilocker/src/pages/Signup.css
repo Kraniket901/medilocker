@@ -1,8 +1,28 @@
-.auth-form-container, .login-form, .register-form {
+.parent-form{
+  display: flex;
+  justify-content: center;
+}
+.auth-form-container {
     display: flex;
     flex-direction: column;
+    width: 400px;
+    background-color: rgb(187, 185, 185);
+    margin-top: 20px;
   }
-  
+  @media (width<400px){
+    .auth-form-container {
+      padding: 3rem;
+      border: 1px solid white;
+      border-radius: 10px;
+      margin: 0.5rem;
+    }
+    .signin-btn{
+      background-color: #759EBD;
+      color: white;
+      width: 90%;
+      margin-top: 30px;
+    }
+  }
   @media screen and (min-width: 600px) {
     .auth-form-container {
       padding: 5rem;
@@ -13,7 +33,7 @@
   }
   
   label {
-    text-align: left;
+    text-align: center;
     padding: 0.25rem 0;
   }
   
@@ -32,7 +52,18 @@
     cursor: pointer;
     color: #7439db;
   }
-  
+  .signin-btn{
+    background-color: #759EBD;
+    color: white;
+    width: 100%;
+    margin-top: 30px;
+  }
+  .signin-btn:hover{
+    background-color: #678fad;
+    color: white;
+    width: 100%;
+    margin-top: 30px;
+  }
   .link-btn {
     background: none;
     color: white;
