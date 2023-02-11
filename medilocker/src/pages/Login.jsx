@@ -58,6 +58,7 @@ const Login = () => {
     }
 
     return (
+        <div  className="parent-form">
         <div className="auth-form-container">
             <h2>Login</h2>
             <form className="login-form">
@@ -66,8 +67,14 @@ const Login = () => {
                 <label htmlFor="password">password</label>
                 <input onChange={(e) => handle(e)} type="password" placeholder="********" id="password" name="password" />
                 <input type="button" value="Log In" onClick={login} />
+                <input value={pass} onChange={(e) => setPass(e.target.value)} type="password" placeholder="********" id="password" name="password" />
+                <Link to="/myprofile">
+                <button className="log-btn" type="submit">Log In</button>
+                </Link>
             </form>
-            <button className="link-btn" onClick={() => props.onFormSwitch('signup')}>Don't have an account? Register here.</button>
+
+            <a href="/signup">Don't have an account? Register here.</a>
+        </div>
         </div>
     )
 }

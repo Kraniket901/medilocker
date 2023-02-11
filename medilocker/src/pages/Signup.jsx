@@ -33,6 +33,7 @@ const Signup = () => {
     }
 
     return (
+        <div  className="parent-form">
         <div className="auth-form-container">
             <h2>Register</h2>
             <form className="register-form">
@@ -43,8 +44,12 @@ const Signup = () => {
                 <label htmlFor="password">password</label>
                 <input onChange={(e) => handle(e)} type="password" placeholder="********" id="password" name="password" />
                 <input type="button" value="Sign Up" onClick={register} />
+                <Link to="/myprofile">
+                <button className="signin-btn" type="submit" onClick={register}>Register</button>
+                </Link>
             </form>
             {/* <button className="link-btn" onClick={() => props.onFormSwitch('login')}>Already have an account? Login here.</button> */}
+        </div>
         </div>
     )
 }
