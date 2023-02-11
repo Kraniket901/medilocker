@@ -1,5 +1,6 @@
 export { default as Home } from './Home';
 export { default as MyProfile } from './MyProfile';
+export { default as Insurance } from './Insurance';
 export { default as Signup } from './Signup';
 export { default as Login } from './Login';
 export { default as Kanban } from './Kanban';
