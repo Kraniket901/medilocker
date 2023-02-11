@@ -93,6 +93,7 @@ const Login = () => {
               name="password"
             />
           </div>
+          
           <p style={{ textAlign: "right" }}>Forgot password?</p>
         </div>
 
@@ -102,6 +103,9 @@ const Login = () => {
           value="Log In"
           onClick={login}
         ></input>
+                  <p style={{ textAlign: "right"}}>Already a user? 
+          <Link style={{marginLeft:"4px", color: "black", textDecoration: "underline"}} to='/signup'>Sign Up.</Link>
+          </p>
       </form>
     </div>
   );
