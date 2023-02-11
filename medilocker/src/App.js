@@ -8,6 +8,7 @@ import { Home, MyProfile, Login, Signup, Orders, Calendar, Employees, Stacked, P
 import './App.css';
 
 import { useStateContext } from './contexts/ContextProvider';
+import Insurance from './pages/Insurance';
 
 const App = () => {
   const { setCurrentColor, setCurrentMode, currentMode, activeMenu, currentColor, themeSettings, setThemeSettings } = useStateContext();
@@ -35,6 +36,7 @@ const App = () => {
                 <Route path="/orders" element={<Orders />} />
                 <Route path="/employees" element={<Employees />} />
                 <Route path="/customers" element={<Customers />} />
+                <Route path="/insurance" element={<Insurance />} />
 
                 {/* apps  */}
                 <Route path="/kanban" element={<Kanban />} />

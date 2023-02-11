@@ -36,10 +36,27 @@ const MyProfile = () => {
     const web3 = new Web3(window.ethereum);
     const mycontract = new web3.eth.Contract(contract['abi'], contract['networks']['5777']['address']);
     // console.log(mycontract);
-    mycontract.methods.updateData(parseInt(cookies['index']) ,JSON.stringify(auth)).send({ from: currentaddress })
-    .then(res => {
-      console.log(res);
-    })
+    mycontract.methods.updateData(parseInt(cookies['index']), JSON.stringify(auth)).send({ from: currentaddress })
+      .then(res => {
+        console.log(res);
+      })
+  }
+
+  async function show() {
+    const web3 = new Web3(window.ethereum);
+    const mycontract = new web3.eth.Contract(
+      contract["abi"],
+      contract["networks"]["5777"]["address"]
+    );
+    mycontract.methods
+      .getdata()
+      .call()
+      .then(res => {
+        res.map(data => {
+          var d = JSON.parse(data);
+          console.log(d);
+        })
+      })
   }
 
   return (
@@ -112,6 +129,10 @@ const MyProfile = () => {
 
             <div className="py-2">
               <input type="button" value="Save" onClick={save} className="bg-cyan-400 text-white font-medium p-3" />
+            </div>
+
+            <div className="py-2">
+              <input type="button" value="Show" onClick={show} className="bg-cyan-400 text-white font-medium p-3" />
             </div>
 
           </form>
