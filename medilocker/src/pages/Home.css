@@ -192,6 +192,10 @@ body.dark-theme {
   width: 40px;
   height: auto;
 }
+.sto-img {
+  width: 55%;
+  height: auto;
+}
 
 @media screen and (max-width: 767px) {
   .nav__menu {

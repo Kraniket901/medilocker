@@ -74,7 +74,7 @@ const MyProfile = () => {
           <Navbar />
         </div>
         <div className="flex justify-center m-10 ">
-          <form className=" p-5">
+          <form className=" p-5 ">
             <h1 className="text-center text-lg">User Profile</h1>
 
 
