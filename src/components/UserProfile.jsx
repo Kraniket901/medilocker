@@ -1,6 +1,8 @@
 import React from 'react';
 import { MdOutlineCancel } from 'react-icons/md';
 
+import { Link, NavLink } from "react-router-dom";
+
 import { Button } from '.';
 import { userProfileData } from '../data/dummy';
 import { useStateContext } from '../contexts/ContextProvider';

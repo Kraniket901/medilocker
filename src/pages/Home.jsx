@@ -82,7 +82,7 @@ const Home = () => {
                 diagnosis and treatment.
               </p>
 
-              <Link to="ecommerce" className="button">
+              <Link to="/myprofile" className="button">
                 Sign Up Now!
               </Link>
             </div>
