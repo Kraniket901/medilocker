@@ -27,7 +27,6 @@ const Login = () => {
 
         const web3 = new Web3(window.ethereum);
         const mycontract = new web3.eth.Contract(contract['abi'], contract['networks']['5777']['address']);
-        // console.log(mycontract);
         mycontract.methods.getdata().call().then(res => {
             let flag = 0;
             for (let i = 0; i < res.length; i++) {

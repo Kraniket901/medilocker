@@ -6,7 +6,7 @@ const Input = () => {
   return <input placeholder="Your input here" />;
 };
 
-const MyForm = () => {
+const Insurance = () => {
   const [inputList, setInputList] = useState([]);
 
   const onAddBtnClick = event => {
@@ -30,4 +30,4 @@ const MyForm = () => {
   );
 };
 
-export default MyForm
+export default Insurance;
