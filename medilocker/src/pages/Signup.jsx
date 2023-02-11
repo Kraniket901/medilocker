@@ -6,7 +6,6 @@ import contract from '../contracts/cruds.json';
 
 const Signup = () => {
     const [reg, setReg] = useState({
-        "filled": "0",
         "type": "user",
         "name": "",
         "mail": "",
@@ -41,9 +40,10 @@ const Signup = () => {
                 <label htmlFor="name">Full name</label>
                 <input name="name" onChange={(e) => handle(e)} id="name" placeholder="full Name" />
                 <label htmlFor="email">email</label>
-                <input onChange={(e) => handle(e)} type="mail" placeholder="youremail@gmail.com" id="email" name="email" />
+                <input onChange={(e) => handle(e)} type="mail" placeholder="youremail@gmail.com" id="email" name="mail" />
                 <label htmlFor="password">password</label>
                 <input onChange={(e) => handle(e)} type="password" placeholder="********" id="password" name="password" />
+                <input type="button" value="Sign Up" onClick={register} />
                 <Link to="/myprofile">
                 <button className="signin-btn" type="submit" onClick={register}>Register</button>
                 </Link>
