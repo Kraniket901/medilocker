@@ -43,7 +43,7 @@ const MyProfile = (props) => {
 
 
       <div className="py-2">
-        <label>
+        <label className="text-black">
         Name:
         <input
         id="inp"
@@ -59,7 +59,7 @@ const MyProfile = (props) => {
         </div>
 
         <div className="py-2">
-        <label>
+        <label className="text-black">
         Email:
         <input
         id="inp"
@@ -77,7 +77,7 @@ const MyProfile = (props) => {
      
 
         <div className="py-2">
-        <label>
+        <label className="text-black">
         Password:
         <input
         style={{padding:"10px", margin:"10px"}}
@@ -87,7 +87,7 @@ const MyProfile = (props) => {
           onChange={e => setPassword(e.target.value)}
           disabled={disabled}
           required />
-      </label>
+      </label >
       <input type="button" value="✎" onClick={handleGameClick}></input>
         </div>
 
