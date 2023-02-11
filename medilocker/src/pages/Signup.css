@@ -1,69 +1,72 @@
-.parent-form{
+.login-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #b7f9f38e;
 }
-.auth-form-container {
-    display: flex;
-    flex-direction: column;
-    width: 400px;
-    background-color: rgb(187, 185, 185);
-    margin-top: 20px;
-  }
-  @media (width<400px){
-    .auth-form-container {
-      padding: 3rem;
-      border: 1px solid white;
-      border-radius: 10px;
-      margin: 0.5rem;
-    }
-    .signin-btn{
-      background-color: #759EBD;
-      color: white;
-      width: 90%;
-      margin-top: 30px;
-    }
-  }
-  @media screen and (min-width: 600px) {
-    .auth-form-container {
-      padding: 5rem;
-      border: 1px solid white;
-      border-radius: 10px;
-      margin: 0.5rem;
-    }
-  }
-  
-  label {
-    text-align: center;
-    padding: 0.25rem 0;
-  }
-  
-  input {
-    margin: 0.5rem 0;
-    padding: 1rem;
-    border: none;
-    border-radius: 10px;
-  }
-  
-  button {
-    border: none;
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    cursor: pointer;
-    color: #7439db;
-  }
-  .signin-btn{
-    background-color: #759EBD;
-    color: white;
-    width: 100%;
-    margin-top: 30px;
-  }
-  .yo:hover{
-    color: white;
-    width: 100%;
-  }
-  .link-btn {
-    background: none;
-    color: white;
-    text-decoration: underline;
-  }
+
+.login-form-title{
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+
+.login-form {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  width: 30%;
+  padding: 4rem 0;
+  backdrop-filter: blur(16px) saturate(180%);
+  background-color: rgba(255, 255, 255, 0.75);
+  border-radius: 12px;
+  border: 1px solid rgba(209, 213, 219, 0.3);
+}
+
+.input-container{
+  width: 70%;
+}
+
+
+.input-div input{
+  width: 100%;
+  margin: 0.5rem 0;
+  padding: 1rem;
+  border: none;
+  border-radius: 10px;
+}
+
+.btn{
+	display: block;
+	width: 70%;
+	border-radius: 25px;
+	outline: none;
+	border: none;
+	background-image: linear-gradient(to right, #32a2be, #389fd3, #3265be);
+	background-size: 200%;
+	font-size: 1.2rem;
+	color: #fff;
+	text-transform: uppercase;
+	margin: 1rem 0;
+	cursor: pointer;
+	transition: .5s;
+  border: none;
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  color: white;
+}
+.btn:hover{
+	background-position: right;
+}
+
+.input-heading {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+

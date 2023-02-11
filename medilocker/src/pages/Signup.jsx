@@ -33,24 +33,46 @@ const Signup = () => {
     }
 
     return (
-        <div  className="parent-form">
-        <div className="auth-form-container">
-            <h2>Register</h2>
-            <form className="register-form">
-                <label htmlFor="name">Full name</label>
-                <input name="name" onChange={(e) => handle(e)} id="name" placeholder="full Name" />
-                <label htmlFor="email">email</label>
-                <input onChange={(e) => handle(e)} type="mail" placeholder="youremail@gmail.com" id="email" name="mail" />
-                <label htmlFor="password">password</label>
-                <input onChange={(e) => handle(e)} type="password" placeholder="********" id="password" name="password" />
-                <input type="button" value="Sign Up" onClick={register} />
-                <Link to="/myprofile">
-                <button className="signin-btn" type="submit" onClick={register}>Register</button>
-                </Link>
-            </form>
-            {/* <button className="link-btn" onClick={() => props.onFormSwitch('login')}>Already have an account? Login here.</button> */}
+
+        <div className="login-container">
+      <form className="login-form">
+        <h2 className="login-form-title">Sign Up</h2>
+        <div className="input-container">
+          <div className="input-div">
+            <div className="input-heading">
+              <i className="fas fa-user"></i>
+              <h5>Username</h5>
+            </div>
+            <input name="name" onChange={(e) => handle(e)} id="name" placeholder="Full Name" />
+
+          </div>
+          <div className="input-div">
+            <div className="input-heading">
+              <i className="fas fa-envelope"></i>
+              <h5>Email</h5>
+            </div>
+            <input onChange={(e) => handle(e)} type="mail" placeholder="youremail@gmail.com" id="email" name="mail" />
+
+
+          </div>
+          <div className="input-div">
+            <div className="input-heading">
+              <i className="fas fa-lock"></i>
+              <h5>Password</h5>
+            </div>
+            <input onChange={(e) => handle(e)} type="password" placeholder="********" id="password" name="password" />
+
+          </div>
+          <p style={{ textAlign: "right"}}>Already a user? 
+          <Link style={{marginLeft:"4px", color: "black", textDecoration: "underline"}} to='/login'>Log In.</Link>
+          </p>
         </div>
-        </div>
+
+        <input type="button" value="Sign Up" className="btn" onClick={register} />
+
+      </form>
+    </div>
+        
     )
 }
 
