@@ -1,10 +1,8 @@
 import React, { useState, Fragment } from "react";
 import { nanoid } from "nanoid";
-import styles from "./MyForm.module.css";
-// import data from "./mock-data.json";
-import ReadOnlyRow from "./components/ReadOnlyRow";
-import EditableRow from "./components/EditableRow";
 import Web3 from "web3";
+import Navbar from "../components/Navbar";
+import Sidebar from "../components/Sidebar";
 import contract from "../contracts/cruds.json";
 import { useCookies } from "react-cookie";
 
@@ -14,13 +12,13 @@ const Insurance = () => {
   const [addFormData, setAddFormData] = useState({
     company: "",
     policyNo: "",
-    expiry: ""
+    expiry: "",
   });
 
   const [editFormData, setEditFormData] = useState({
     company: "",
     policyNo: "",
-    expiry: ""
+    expiry: "",
   });
 
   const [editContactId, setEditContactId] = useState(null);
@@ -107,103 +105,130 @@ const Insurance = () => {
     setContacts(newContacts);
   };
 
-
   async function submit() {
-    var accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+    var accounts = await window.ethereum.request({
+      method: "eth_requestAccounts",
+    });
     var currentaddress = accounts[0];
 
     const web3 = new Web3(window.ethereum);
-    const mycontract = new web3.eth.Contract(contract['abi'], contract['networks']['5777']['address']);
+    const mycontract = new web3.eth.Contract(
+      contract["abi"],
+      contract["networks"]["5777"]["address"]
+    );
     // console.log(mycontract);
 
-    mycontract.methods.getdata().call().then(res => {
-      for (let i = 0; i < res.length; i++) {
-        var data = JSON.parse(res[i]);
-        // console.log(data['mail']);
-        if (data['mail'] === cookies['mail']) {
-          data['insurance'].push(addFormData)
+    mycontract.methods
+      .getdata()
+      .call()
+      .then((res) => {
+        for (let i = 0; i < res.length; i++) {
+          var data = JSON.parse(res[i]);
+          // console.log(data['mail']);
+          if (data["mail"] === cookies["mail"]) {
+            data["insurance"].push(addFormData);
 
-          mycontract.methods.updateData(parseInt(cookies['index']), JSON.stringify(data)).send({ from: currentaddress }).then(() => {
-            alert("Insurance Saved");
-            var data = cookies['insurance'];
-            data.push(addFormData);
-            setCookie('insurance', data);
-          }).catch((err) => {
-            console.log(err);
-          })
+            mycontract.methods
+              .updateData(parseInt(cookies["index"]), JSON.stringify(data))
+              .send({ from: currentaddress })
+              .then(() => {
+                alert("Insurance Saved");
+                var data = cookies["insurance"];
+                data.push(addFormData);
+                setCookie("insurance", data);
+              })
+              .catch((err) => {
+                console.log(err);
+              });
 
-          break;
+            break;
+          }
         }
-      }
-    })
-
+      });
   }
 
   async function show() {
-    cookies['insurance'].map(data => {
+    cookies["insurance"].map((data) => {
       console.log(data);
-    })
+    });
   }
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "10px", padding: "1rem" }}>
-      <form>
-        <table style={{ borderCollapse: "collapse", width: "10%" }}>
-          <thead>
-            <tr>
-              <th className={styles.thh}>Policy Number</th>
-              <th className={styles.thh}>Company</th>
-              <th className={styles.thh}>Expiry</th>
-              {/* <th className={styles.thh}>Email</th>
+    <div className="flex relative dark:bg-main-dark-bg">
+      <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-white ">
+        <Sidebar />
+      </div>
+
+      <div
+        className={
+          "dark:bg-main-dark-bg  bg-main-bg min-h-screen ml-72 w-full  "
+        }
+      >
+        <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full ">
+          <Navbar />
+        </div>
+        <div
+          style={{ display: "flex", flexDirection: "column", padding: "1rem" }}
+        >
+          <form>
+            <table style={{ borderCollapse: "collapse" }}>
+              <thead>
+                <tr>
+                  <th className="">Policy Number</th>
+                  <th className="">Company</th>
+                  <th className="">Expiry</th>
+                  {/* <th className={styles.thh}>Email</th>
               <th className={styles.thh}>Actions</th> */}
-            </tr>
-          </thead>
-          <tbody>
-            {cookies['insurance'].map((contact) => (
-              <tr>
-                <td>{contact.policyNo}</td>
-                <td>{contact.company}</td>
-                <td>{contact.expiry}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                </tr>
+              </thead>
+              <tbody>
+                {cookies["insurance"].map((contact) => (
+                  <tr>
+                    <td>{contact.policyNo}</td>
+                    <td>{contact.company}</td>
+                    <td>{contact.expiry}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </form>
 
-      </form>
-
-      <h2>Add a Contact</h2>
-      <form>
-        <input
-          type="text"
-          name="company"
-          required="required"
-          placeholder="Taken from which company?"
-          onChange={handleAddFormChange}
-        />
-        <input
-          type="text"
-          name="policyNo"
-          required="required"
-          placeholder="Policy No."
-          onChange={handleAddFormChange}
-        />
-        <input
-          type="text"
-          name="expiry"
-          required="required"
-          placeholder="Expiry Date"
-          onChange={handleAddFormChange}
-        />
-        {/* <input
+          <h2>Add a Contact</h2>
+          <form>
+            <input
+              type="text"
+              name="company"
+              required="required"
+              placeholder="Taken from which company?"
+              onChange={handleAddFormChange}
+            />
+            <input
+              type="text"
+              name="policyNo"
+              required="required"
+              placeholder="Policy No."
+              onChange={handleAddFormChange}
+            />
+            <input
+              type="text"
+              name="expiry"
+              required="required"
+              placeholder="Expiry Date"
+              onChange={handleAddFormChange}
+            />
+            {/* <input
           type="email"
           name="email"
           required="required"
           placeholder="Enter an email..."
           onChange={handleAddFormChange}
         /> */}
-        <input type="button" value="Save" onClick={submit} />
-        {/* <input type="button" value="Show" onClick={show} /> */}
-      </form>
+            <input type="button" value="Save" onClick={submit} />
+            {/* <input type="button" value="Show" onClick={show} /> */}
+          </form>
+        </div>
+        <Footer />
+      </div>
     </div>
   );
 };
