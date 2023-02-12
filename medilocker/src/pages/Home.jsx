@@ -6,8 +6,8 @@ import { GiStethoscope } from 'react-icons/gi';
 
 import logo from "../data/logo.png";
 import logosvg from "../data/logo.svg";
-import sthetoscope from "../data/stethoscope.svg";
-import down from "../data/down.svg";
+import sthetoscope from "../data/stethoscope.png";
+import down from "../data/upload.svg";
 import user from "../data/user.svg";
 import tick from "../data/tick.svg";
 import member1 from "../data/1.png";
@@ -63,7 +63,7 @@ const Home = () => {
             <i className="bx bx-grid-alt"></i>
           </div>
           <div style={{ display: "flex" }}>
-            <Link to="/login" className="button button__header log">
+            <Link to="/login" className="buttoni button__header log">
               Log In
             </Link>
             <Link to="/signup" className="button button__header">
