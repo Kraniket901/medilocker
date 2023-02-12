@@ -87,7 +87,7 @@ const Home = () => {
                 diagnosis and treatment.
               </p>
 
-              <Link to="/myprofile" className="button">
+              <Link to="/signup" className="button">
                 Sign Up Now!
               </Link>
             </div>
@@ -147,7 +147,7 @@ const Home = () => {
               <h3 className="services__subtitle">Disease Prediction Model</h3>
               <img className="servicesimg" src={dissease} />
               <p className="services__description">
-              Get a precautionary alert about diseases you might suffer from, based on our ML model.
+              Get a quick diagnosis about diseases you might suffer from, based on our ML model.
               </p>
             </div>
           </div>
