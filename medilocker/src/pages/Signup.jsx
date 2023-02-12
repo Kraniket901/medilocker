@@ -25,6 +25,23 @@ const Signup = () => {
     }
 
     async function register() {
+
+        // await fetch(`http://172.22.137.252:5001/hashing/${JSON.stringify(data)}`, {
+        //     // method: "POST",
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //     },
+        //     // body: JSON.stringify(newPerson),
+        // })
+        //     .then(res => res.json())
+        //     .then(d => {
+        //         setDisease(d);
+        //     })
+        //     .catch(error => {
+        //         window.alert(error);
+        //         return;
+        //     });
+
         console.log(reg);
         var accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
         var currentaddress = accounts[0];
@@ -78,15 +95,15 @@ const Signup = () => {
                     </div>
 
                     {reg.type === "doctor" &&
-                        <div className="input-div" style={{ display: 'flex', gap:'1rem'}}>
-                            <div style={{display: 'flex', flexDirection:'column'}}>
+                        <div className="input-div" style={{ display: 'flex', gap: '1rem' }}>
+                            <div style={{ display: 'flex', flexDirection: 'column' }}>
                                 <div className="input-heading">
                                     <i className="fas fa-suitcase"></i>
                                     <p>Specialization</p>
                                 </div>
                                 <input onChange={(e) => handle(e)} type="text" placeholder="Specialization" id="email" name="speciality" />
                             </div>
-                            <div style={{display: 'flex', flexDirection:'column'}}>
+                            <div style={{ display: 'flex', flexDirection: 'column' }}>
                                 <div className="input-heading">
                                     <i className="fas fa-key"></i>
                                     <p>License No.</p>
