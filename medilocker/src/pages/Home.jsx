@@ -10,6 +10,9 @@ import sthetoscope from "../data/stethoscope.png";
 import down from "../data/upload.svg";
 import user from "../data/user.svg";
 import tick from "../data/tick.svg";
+import store from "../data/store.png";
+import doc from "../data/doc.svg";
+import dissease from "../data/dissease.png";
 import member1 from "../data/1.png";
 import member2 from "../data/2.png";
 
@@ -42,8 +45,8 @@ const Home = () => {
                 </a>
               </li>
               <li className="nav__item">
-                <a href="#team" className="nav__link">
-                  Team
+                <a href="#services" className="nav__link">
+                  Services
                 </a>
               </li>
               <li className="nav__item">
@@ -63,7 +66,7 @@ const Home = () => {
             <i className="bx bx-grid-alt"></i>
           </div>
           <div style={{ display: "flex" }}>
-            <Link to="/login" className="buttoni button__header log">
+            <Link to="/login" className="button button__header log">
               Log In
             </Link>
             <Link to="/signup" className="button button__header">
@@ -112,10 +115,39 @@ const Home = () => {
             </div>
 
             <div className="services__data">
-              <h3 className="services__subtitle">Upload your Documents</h3>
+              <h3 className="services__subtitle">Upload your Data</h3>
               <img className="services__img" src={down} />
               <p className="services__description">
                 Create, update, or view your health record information.
+              </p>
+            </div>
+          </div>
+        </section>
+        <section className="services section container" id="services">
+          <h2 className="section__title">Services we deliver</h2>
+          <div className="services__container grid">
+            <div className="services__data">
+              <h3 className="services__subtitle">Maintaining Medical Records</h3>
+              <img className="services__img" src={store} />
+              <p className="services__description">
+              Keep track of your medical records, enabled by blockchain
+                technology.
+              </p>
+            </div>
+
+            <div className="services__data">
+              <h3 className="services__subtitle">Connect With Doctors</h3>
+              <img className="services_img" src={doc} />
+              <p className="services__description">
+              Share your records with our trusted medical experts, to get a prescription.
+              </p>
+            </div>
+
+            <div className="services__data">
+              <h3 className="services__subtitle">Disease Prediction Model</h3>
+              <img className="servicesimg" src={dissease} />
+              <p className="services__description">
+              Get a precautionary alert about diseases you might suffer from, based on our ML model.
               </p>
             </div>
           </div>
