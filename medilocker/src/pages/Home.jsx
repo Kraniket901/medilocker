@@ -10,6 +10,9 @@ import sthetoscope from "../data/stethoscope.png";
 import down from "../data/upload.svg";
 import user from "../data/user.svg";
 import tick from "../data/tick.svg";
+import store from "../data/store.png";
+import doc from "../data/doc.svg";
+import dissease from "../data/dissease.png";
 import member1 from "../data/1.png";
 import member2 from "../data/2.png";
 
@@ -40,12 +43,12 @@ const Home = () => {
                 <a href="#how" className="nav__link">
                   How?
                 </a>
-              </li>
-              <li className="nav__item">
-                <a href="#team" className="nav__link">
-                  Team
-                </a>
               </li> */}
+              <li className="nav__item">
+                <a href="#services" className="nav__link">
+                  Services
+                </a>
+              </li>
               <li className="nav__item">
                 <a href="#contact" className="nav__link">
                   Contact Us
@@ -63,7 +66,7 @@ const Home = () => {
             <i className="bx bx-grid-alt"></i>
           </div>
           <div style={{ display: "flex" }}>
-            <Link to="/login" className="buttoni button__header log">
+            <Link to="/login" className="button button__header log">
               Log In
             </Link>
             <Link to="/signup" className="button button__header">
@@ -84,7 +87,7 @@ const Home = () => {
                 diagnosis and treatment.
               </p>
 
-              <Link to="/myprofile" className="button">
+              <Link to="/signup" className="button">
                 Sign Up Now!
               </Link>
             </div>
@@ -112,7 +115,7 @@ const Home = () => {
             </div>
 
             <div className="services__data">
-              <h3 className="services__subtitle">Review your Documents</h3>
+              <h3 className="services__subtitle">Upload your Data</h3>
               <img className="services__img" src={down} />
               <p className="services__description">
                 Create, update, or view your health record information.
@@ -120,7 +123,132 @@ const Home = () => {
             </div>
           </div>
         </section>
-       <section className="contact section container" id="contact">
+        <section className="services section container" id="services">
+          <h2 className="section__title">Services we deliver</h2>
+          <div className="services__container grid">
+            <div className="services__data">
+              <h3 className="services__subtitle">Maintaining Medical Records</h3>
+              <img className="services__img" src={store} />
+              <p className="services__description">
+              Keep track of your medical records, enabled by blockchain
+                technology.
+              </p>
+            </div>
+
+            <div className="services__data">
+              <h3 className="services__subtitle">Connect With Doctors</h3>
+              <img className="services_img" src={doc} />
+              <p className="services__description">
+              Share your records with our trusted medical experts, to get a prescription.
+              </p>
+            </div>
+
+            <div className="services__data">
+              <h3 className="services__subtitle">Disease Prediction Model</h3>
+              <img className="servicesimg" src={dissease} />
+              <p className="services__description">
+              Get a quick diagnosis about diseases you might suffer from, based on our ML model.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        
+        {/* <section class="team-container section container" id="team">
+            <h2 class="section__title">Our Team - DumbDumberDumbest</h2>
+            <div class="team">
+                <div class="card">
+                    <div class="card--border">
+                        <img src={member1} alt="card image" class="card--img"/>
+                    </div>
+                    <h3 class="card--name">Viraj Chandra</h3>
+                    <span class="card--profession">Frontend Developer</span>
+
+                    <div class="card--social" id="card-social1">
+                        <div class="card--social-control">
+                            <div class="card--social-toggle" id="card-toggle1">
+                                <i class="ri-add-line"></i>
+                            </div>
+
+                            <span class="card--social-text">Reach Me</span>
+                            <ul class="card--social-list">
+                                <a href="https://www.instagram.com/me_ayan_710/" target="_blank"
+                                    class="card--social-link">
+                                    <i class="ri-instagram-line"></i>
+                                </a>
+                                <a href="https://www.linkedin.com/in/viraj-chandra/" target="_blank"
+                                    class="card--social-link">
+                                    <i class="ri-linkedin-line"></i>
+                                </a>
+                                <a href="https://github.com/virajchandra51" target="_blank" class="card--social-link">
+                                    <i class="ri-github-line"></i>
+                                </a>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card--border">
+                        <img src={member2} alt="card image" class="card--img"/>
+                    </div>
+                    <h3 class="card--name">Vibhor Singh</h3>
+                    <span class="card--profession">Backend Developer</span>
+
+                    <div class="card--social" id="card-social2">
+                        <div class="card--social-control">
+                            <div class="card--social-toggle" id="card-toggle2">
+                                <i class="ri-add-line"></i>
+                            </div>
+
+                            <span class="card--social-text">Reach Me</span>
+                            <ul class="card--social-list">
+                                <a href="https://www.instagram.com/vibhorsingh_1234/" target="_blank" class="card--social-link">
+                                    <i class="ri-instagram-line"></i>
+                                </a>
+                                <a href="https://www.linkedin.com/in/vibhor-singh-1577b122a/" target="_blank"
+                                    class="card--social-link">
+                                    <i class="ri-linkedin-line"></i>
+                                </a>
+                                <a href="https://github.com/Singh-Vibhor" target="_blank" class="card--social-link">
+                                    <i class="ri-github-line"></i>
+                                </a>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card--border">
+                        <img src={member2} alt="card image" class="card--img"/>
+                    </div>
+                    <h3 class="card--name">Vikash Kumar</h3>
+                    <span class="card--profession">GUI Developer</span>
+
+                    <div class="card--social" id="card-social3">
+                        <div class="card--social-control">
+                            <div class="card--social-toggle" id="card-toggle3">
+                                <i class="ri-add-line"></i>
+                            </div>
+
+                            <span class="card--social-text">Reach Me</span>
+                            <ul class="card--social-list">
+                                <a href="https://instagram.com/honey__vikash?igshid=ZDdkNTZiNTM=" target="_blank"
+                                    class="card--social-link">
+                                    <i class="ri-instagram-line"></i>
+                                </a>
+                                <a href="https://www.linkedin.com/in/vikash-kumar-93bb39229/" target="_blank"
+                                    class="card--social-link">
+                                    <i class="ri-linkedin-line"></i>
+                                </a>
+                                <a href="https://github.com/honeyvikash" target="_blank" class="card--social-link">
+                                    <i class="ri-github-line"></i>
+                                </a>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section> */}
+        <section className="contact section container" id="contact">
             <div className="contact__container grid">
                 <div className="contact__content">
                     <h2 className="section__title-center">Contact Us</h2>
