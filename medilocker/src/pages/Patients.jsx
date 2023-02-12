@@ -10,9 +10,10 @@ const Patients = () => {
     const [cookies, setCookie] = useCookies();
     const [patients, setPat] = useState([]);
 
+    // to list all patients assigned
     async function show() {
-        patients.map(d => {
-            console.log(d);
+        cookies['patients'].map(data => {
+            console.log(data);
         })
     }
 
@@ -116,6 +117,7 @@ const Patients = () => {
                             </tbody>
                         </table>
                     </div>
+                    {/* <input type="button" value="Show" onClick={show} /> */}
                 </div>
                 {/* <Footer /> */}
             </div>

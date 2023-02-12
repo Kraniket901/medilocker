@@ -13,7 +13,7 @@ const Doctors = () => {
     // const dataFetchedRef = useRef(false);
     // useEffect(async () => {
     //     if (dataFetchedRef.current) return;
-        // dataFetchedRef.current = true;
+    // dataFetchedRef.current = true;
     //     var accounts = await window.ethereum.request({
     //         method: "eth_requestAccounts",
     //     });
@@ -43,10 +43,23 @@ const Doctors = () => {
     // }, []);
 
 
+    // to show data of current logged in patient
     async function show() {
-        doctors.map(d => {
-            console.log(d);
-        })
+        var accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        var currentaddress = accounts[0];
+
+        const web3 = new Web3(window.ethereum);
+        const mycontract = new web3.eth.Contract(contract['abi'], contract['networks']['5777']['address']);
+        // console.log(mycontract);
+        mycontract.methods.getdata().call()
+            .then(res => {
+                res.map(data => {
+                    data = JSON.parse(data);
+                    if (data['type'] === 'patient' && data['mail'] === cookies['mail']) {
+                        console.log(data);
+                    }
+                })
+            })
     }
 
     async function add(mail) {
@@ -118,6 +131,7 @@ const Doctors = () => {
                             </tbody>
                         </table>
                     </div>
+                    {/* <input type="button" value="Show" onClick={show} /> */}
                 </div>
                 {/* <Footer /> */}
             </div>

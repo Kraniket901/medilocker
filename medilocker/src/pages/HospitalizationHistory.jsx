@@ -129,16 +129,16 @@ const HospitalizationHistory = () => {
           var data = JSON.parse(res[i]);
           // console.log(data['mail']);
           if (data["mail"] === cookies["mail"]) {
-            data["medicalhistory"].push(addFormData);
+            data["hospitalizationhistory"].push(addFormData);
 
             mycontract.methods
               .updateData(parseInt(cookies["index"]), JSON.stringify(data))
               .send({ from: currentaddress })
               .then(() => {
                 alert("Hospitalization History Saved");
-                var data = cookies["medicalhistory"];
+                var data = cookies["hospitalizationhistory"];
                 data.push(addFormData);
-                setCookie("medicalhistory", data);
+                setCookie("hospitalizationhistory", data);
               })
               .catch((err) => {
                 console.log(err);
@@ -151,7 +151,7 @@ const HospitalizationHistory = () => {
   }
 
   async function show() {
-    cookies["medicalhistory"].map((data) => {
+    cookies["hospitalizationhistory"].map((data) => {
       console.log(data);
     });
   }
