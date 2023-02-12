@@ -6,11 +6,16 @@ import contract from '../contracts/cruds.json';
 
 const Signup = () => {
     const [reg, setReg] = useState({
-        "type": "user",
+        "type": "patient",
         "name": "",
         "mail": "",
         "password": "",
-        "insurance": [{}]
+        "insurance": [{}],
+        "allergies": [{}],
+        "medicalhistory": [{}],
+        "hospitalizationhistory": [{}],
+        "visit": [{}],
+        "selectedDoctors": [{}]
     });
 
     function handle(e) {
@@ -20,6 +25,7 @@ const Signup = () => {
     }
 
     async function register() {
+        console.log(reg);
         var accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
         var currentaddress = accounts[0];
 
@@ -49,8 +55,18 @@ const Signup = () => {
                             <h5>Username</h5>
                         </div>
                         <input name="name" onChange={(e) => handle(e)} id="name" placeholder="Full Name" />
-
                     </div>
+                    <div className="input-div">
+                        <div className="input-heading" style={{ margin: "1rem 0", }}>
+                            <i className="fas fa-key"></i>
+                            <h5>User Type</h5>
+                            <select id="user-type" name="type" onChange={(e) => handle(e)}>
+                                <option value="patient">Patient</option>
+                                <option value="doctor">Doctor</option>
+                            </select>
+                        </div>
+                    </div>
+
                     <div className="input-div">
                         <div className="input-heading">
                             <i className="fas fa-envelope"></i>
@@ -60,6 +76,26 @@ const Signup = () => {
 
 
                     </div>
+
+                    {reg.type === "doctor" &&
+                        <div className="input-div" style={{ display: 'flex', gap:'1rem'}}>
+                            <div style={{display: 'flex', flexDirection:'column'}}>
+                                <div className="input-heading">
+                                    <i className="fas fa-suitcase"></i>
+                                    <p>Specialization</p>
+                                </div>
+                                <input onChange={(e) => handle(e)} type="text" placeholder="Specialization" id="email" name="speciality" />
+                            </div>
+                            <div style={{display: 'flex', flexDirection:'column'}}>
+                                <div className="input-heading">
+                                    <i className="fas fa-key"></i>
+                                    <p>License No.</p>
+                                </div>
+                                <input onChange={(e) => handle(e)} type="text" placeholder="License No." id="email" name="licenseno" />
+                            </div>
+                        </div>
+                    }
+
                     <div className="input-div">
                         <div className="input-heading">
                             <i className="fas fa-lock"></i>
@@ -76,8 +112,8 @@ const Signup = () => {
                     <Link style={{ marginLeft: "4px", color: "black", textDecoration: "underline" }} to='/login'>Log In.</Link>
                 </p>
 
-            </form>
-        </div>
+            </form >
+        </div >
 
     )
 }

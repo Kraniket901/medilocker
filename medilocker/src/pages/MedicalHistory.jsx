@@ -7,19 +7,19 @@ import Sidebar from "../components/Sidebar";
 import contract from "../contracts/cruds.json";
 import { useCookies } from "react-cookie";
 
-const Insurance = () => {
+const MedicalHistory = () => {
   const [cookies, setCookie] = useCookies();
 
   const [addFormData, setAddFormData] = useState({
-    company: "",
-    policyNo: "",
-    expiry: "",
+    disease: "",
+    time: "",
+    solved: "",
   });
 
   const [editFormData, setEditFormData] = useState({
-    company: "",
-    policyNo: "",
-    expiry: "",
+    disease: "",
+    time: "",
+    solved: "",
   });
 
   const [editContactId, setEditContactId] = useState(null);
@@ -106,8 +106,6 @@ const Insurance = () => {
     setContacts(newContacts);
   };
 
-
-
   async function submit() {
     var accounts = await window.ethereum.request({
       method: "eth_requestAccounts",
@@ -129,20 +127,21 @@ const Insurance = () => {
           var data = JSON.parse(res[i]);
           // console.log(data['mail']);
           if (data["mail"] === cookies["mail"]) {
-            data["insurance"].push(addFormData);
+            data["medicalhistory"].push(addFormData);
 
             mycontract.methods
               .updateData(parseInt(cookies["index"]), JSON.stringify(data))
               .send({ from: currentaddress })
               .then(() => {
-                alert("Insurance Saved");
-                var data = cookies["insurance"];
+                alert("Medical History Saved");
+                var data = cookies["medicalhistory"];
                 data.push(addFormData);
-                setCookie("insurance", data);
+                setCookie("medicalhistory", data);
               })
               .catch((err) => {
                 console.log(err);
               });
+
             break;
           }
         }
@@ -150,59 +149,9 @@ const Insurance = () => {
   }
 
   async function show() {
-    cookies["insurance"].map((data) => {
+    cookies["medicalhistory"].map((data) => {
       console.log(data);
     });
-  }
-
-  function resetCook(data) {
-    var list = [];
-    for (let j = 1; j < data.length; j++) {
-      list.push(data[j]);
-    }
-    setCookie("insurance", list);
-  }
-
-  async function del(policy) {
-    var accounts = await window.ethereum.request({
-      method: "eth_requestAccounts",
-    });
-    var currentaddress = accounts[0];
-
-    const web3 = new Web3(window.ethereum);
-    const mycontract = new web3.eth.Contract(
-      contract["abi"],
-      contract["networks"]["5777"]["address"]
-    );
-
-    mycontract.methods.getdata().call().then(res => {
-      res.map(data => {
-        data = JSON.parse(data);
-        if (data['type'] === 'patient' && data['mail'] === cookies['mail']) {
-          var list = data['insurance'];
-          var updateList = []
-
-          for (let i = 0; i < list.length; i++) {
-            if (list[i]['policyNo'] !== policy) {
-              updateList.push(list[i]);
-            }
-          }
-
-          data['insurance'] = updateList;
-
-          mycontract.methods.updateData(cookies['index'], JSON.stringify(data))
-            .send({ from: currentaddress })
-            .then(() => {
-              alert("Removed");
-              resetCook(updateList)
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-          return;
-        }
-      })
-    })
   }
 
   return (
@@ -220,61 +169,55 @@ const Insurance = () => {
           <Navbar />
         </div>
         <div
-          style={{ display: "flex", flexDirection: "column", padding: "4rem", justifyContent: "center", alignItems: "flex-end", gap: "4rem" }}
+          style={{ display: "flex", flexDirection: "column", padding: "4rem", justifyContent: "center", alignItems:"flex-end", gap:"4rem" }}
         >
-          <form style={{ width: "100%" }}>
+          <form style={{width:"100%"}}>
             <table style={{ borderCollapse: "collapse" }}>
               <thead>
                 <tr>
-                  <th className="">Policy Number</th>
-                  <th className="">Company</th>
-                  <th className="">Expiry</th>
-                  <th className="">Actions</th>
+                  <th className="">Disease</th>
+                  <th className="">Diagnosed Date</th>
+                  <th className="">Status</th>
                 </tr>
               </thead>
               <tbody>
-                {cookies["insurance"].map((contact) => (
+                {cookies["medicalhistory"].map((mh) => (
                   <tr>
-                    <td>{contact.policyNo}</td>
-                    <td>{contact.company}</td>
-                    <td>{contact.expiry}</td>
-                    <td>
-                      <input type="button" value="Delete" onClick={() => del(contact.policyNo)} />
-                    </td>
+                    <td>{mh.disease}</td>
+                    <td>{mh.time}</td>
+                    <td>{mh.solved}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </form>
 
-          <form style={{
-            display: 'flex', flexDirection: 'column', gap: '1rem',
-            backgroundColor: 'rgb(3, 201, 215)',
-            justifyContent: 'center',
-            alignItems: 'center',
-            padding: '24px',
-            borderRadius: '20px',
-          }}>
-            <h2>Add an Insurance</h2>
+          <form style={{display:'flex', flexDirection:'column', gap:'1rem',
+    backgroundColor: 'rgb(3, 201, 215)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '24px',
+    borderRadius: '20px',}}>
+            <h2>Add your Medical History</h2>
             <input
               type="text"
-              name="company"
+              name="disease"
               required="required"
-              placeholder="Company"
+              placeholder="Disease"
               onChange={handleAddFormChange}
             />
             <input
               type="text"
-              name="policyNo"
+              name="time"
               required="required"
-              placeholder="Policy No."
+              placeholder="Diagnosed Date"
               onChange={handleAddFormChange}
             />
             <input
               type="text"
-              name="expiry"
+              name="solved"
               required="required"
-              placeholder="Expiry Date"
+              placeholder="Treated/Ongoing"
               onChange={handleAddFormChange}
             />
             <input type="button" value="Save" onClick={submit} />
@@ -286,4 +229,4 @@ const Insurance = () => {
   );
 };
 
-export default Insurance;
+export default MedicalHistory;

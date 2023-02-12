@@ -1,46 +1,38 @@
 import React from "react";
 import { useState } from 'react';
 import Navbar from "../components/Navbar";
-import Sidebar from "../components/Sidebar";
+import Sidebar2 from "../components/Sidebar2";
 import Footer from "../components/Footer";
 import { useCookies } from 'react-cookie';
 import Web3 from "web3";
 import contract from '../contracts/cruds.json';
 
-const MyProfile = () => {
+const MyProfileDoc = () => {
   const [cookies, setCookie] = useCookies();
   const [name, setName] = React.useState(cookies['name']);
   const [email, setEmail] = React.useState(cookies['mail']);
   const [password, setPassword] = React.useState(cookies['password']);
+  const [licenseno, setLicenseno] = React.useState(cookies['licenseno']);
   // const [acceptedTerms, setAcceptedTerms] = React.useState(false);
 
   const [auth, setAuth] = useState({
     "type": "user",
     "name": name,
     "mail": email,
-    "password": password
+    "password": password,
   })
 
-  const [disabled1, setDisabled1] = useState(true);
+  const [disabled, setDisabled] = useState(true);
 
-  function handleGameClick1() {
-    setDisabled1(!disabled1);
-  }
-  const [disabled2, setDisabled2] = useState(true);
-
-  function handleGameClick2() {
-    setDisabled2(!disabled2);
-  }
-  const [disabled3, setDisabled3] = useState(true);
-
-  function handleGameClick3() {
-    setDisabled3(!disabled3);
+  function handleGameClick() {
+    setDisabled(!disabled);
   }
 
   async function save() {
     setCookie("name", name);
     setCookie("mail", email);
     setCookie("password", password);
+    setCookie("licenseno",licenseno);
     var accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
     var currentaddress = accounts[0];
 
@@ -73,7 +65,7 @@ const MyProfile = () => {
   return (
     <div className="flex relative dark:bg-main-dark-bg">
       <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-white ">
-        <Sidebar />
+        <Sidebar2 />
       </div>
 
       <div
@@ -85,7 +77,7 @@ const MyProfile = () => {
           <Navbar />
         </div>
         <div className="flex justify-center m-10 ">
-          <form className=" p-5 bg-slate-100 rounded-lg">
+          <form className=" p-5 ">
             <h1 className="text-center text-lg">User Profile</h1>
 
 
@@ -99,10 +91,10 @@ const MyProfile = () => {
                   type="email"
                   value={name}
                   onChange={e => setName(e.target.value)}
-                  disabled={disabled1}
+                  disabled={disabled}
                   required />
               </label>
-              <input type="button" value="✎" className="text-2xl hover:text-blue-400 cursor-pointer" onClick={handleGameClick1}></input>
+              <input type="button" value="✎" onClick={handleGameClick}></input>
             </div>
 
             <div className="py-2">
@@ -115,12 +107,11 @@ const MyProfile = () => {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  disabled={disabled2}
+                  disabled={disabled}
                   required />
               </label>
-              <input type="button" value="✎" className="text-2xl hover:text-blue-400 cursor-pointer" onClick={handleGameClick2}></input>
+              <input type="button" value="✎" onClick={handleGameClick}></input>
             </div>
-
 
 
             <div className="py-2">
@@ -132,16 +123,30 @@ const MyProfile = () => {
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  disabled={disabled3}
+                  disabled={disabled}
                   required />
               </label >
-              <input type="button" value="✎" className="text-2xl hover:text-blue-400 cursor-pointer" onClick={handleGameClick3}></input>
+              <input type="button" value="✎" onClick={handleGameClick}></input>
+            </div>
+
+            <div className="py-2">
+              <label className="text-black">
+                License No.:
+                <input
+                  style={{ padding: "10px", margin: "10px" }}
+                  name="licenseno"
+                  type="number"
+                  value={licenseno}
+                  onChange={(e) => setLicenseno(e.target.value)}
+                  disabled={disabled}
+                  required />
+              </label >
+              <input type="button" value="✎" onClick={handleGameClick}></input>
             </div>
 
             <div className="py-2">
               <input type="button" value="Save" onClick={save} className="bg-cyan-400 text-white font-medium p-3" />
             </div>
-
           </form>
         </div>
 
@@ -151,4 +156,4 @@ const MyProfile = () => {
   );
 };
 
-export default MyProfile;
+export default MyProfileDoc;
