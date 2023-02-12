@@ -43,8 +43,6 @@ pickle.dump(rf_model, open('rf_model.pkl', 'wb'))
 
 symptoms = X.columns.values
  
-# Creating a symptom index dictionary to encode the
-# input symptoms into numerical form
 symptom_index = {}
 for index, value in enumerate(symptoms):
     symptom = " ".join([i.capitalize() for i in value.split("_")])
