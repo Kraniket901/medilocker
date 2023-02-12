@@ -86,6 +86,14 @@ const Login = () => {
             })
     }
 
+    function resetCook(val, data) {
+        var list = [];
+        for (let j = 1; j < data.length; j++) {
+            list.push(data[j]);
+        }
+        setCookie(val, list);
+    }
+
     async function login() {
         console.log(log);
         if (log['type'] === 'patient') {
@@ -122,7 +130,20 @@ const Login = () => {
                                 setCookie("name", d["name"]);
                                 setCookie("password", d["password"]);
                                 setCookie("insurance", d["insurance"]);
+                                resetCook("insurance",d['insurance']);
+
                                 setCookie("allergies", d["allergies"]);
+                                resetCook("allergies",d['allergies']);
+
+                                setCookie("medicalhistory", d["medicalhistory"]);
+                                resetCook("medicalhistory",d['medicalhistory']);
+
+                                setCookie("hospitalizationhistory", d["hospitalizationhistory"]);
+                                resetCook("hospitalizationhistory",d['hospitalizationhistory']);
+
+                                setCookie("visit", d["visit"]);
+                                resetCook("visit",d['visit']);
+
                                 setCookie("type", d["type"]);
 
                                 // mycontract.methods
@@ -156,6 +177,7 @@ const Login = () => {
                                 setCookie("name", d["name"]);
                                 setCookie("password", d["password"]);
                                 setCookie("type", d["type"]);
+                                setCookie("licenseno", d["licenseno"]);
                                 window.location.href = "/myprofiledoc";
                             }
                         }
@@ -253,13 +275,6 @@ const Login = () => {
                     value="Log In"
                     onClick={login}
                 />
-                <input
-                    type="button"
-                    className="btn"
-                    value="Show"
-                    onClick={show}
-                />
-
                 <p style={{ textAlign: "right" }}>Don't have an account?
                     <Link style={{ marginLeft: "4px", color: "black", textDecoration: "underline" }} to='/signup'>Sign Up.</Link>
                 </p>

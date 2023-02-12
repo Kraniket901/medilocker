@@ -12,6 +12,9 @@ const Signup = () => {
         "password": "",
         "insurance": [{}],
         "allergies": [{}],
+        "medicalhistory": [{}],
+        "hospitalizationhistory": [{}],
+        "visit": [{}],
         "selectedDoctors": [{}]
     });
 
@@ -54,7 +57,7 @@ const Signup = () => {
                         <input name="name" onChange={(e) => handle(e)} id="name" placeholder="Full Name" />
                     </div>
                     <div className="input-div">
-                        <div className="input-heading" style={{margin:"1rem 0",}}>
+                        <div className="input-heading" style={{ margin: "1rem 0", }}>
                             <i className="fas fa-key"></i>
                             <h5>User Type</h5>
                             <select id="user-type" name="type" onChange={(e) => handle(e)}>
@@ -62,7 +65,6 @@ const Signup = () => {
                                 <option value="doctor">Doctor</option>
                             </select>
                         </div>
-
                     </div>
 
                     <div className="input-div">
@@ -75,14 +77,24 @@ const Signup = () => {
 
                     </div>
 
-                    { reg.type==="doctor" &&
-                    <div className="input-div">
-                        <div className="input-heading">
-                            <i className="fas fa-envelope"></i>
-                            <h5>Speciality</h5>
+                    {reg.type === "doctor" &&
+                        <div className="input-div" style={{ display: 'flex', gap:'1rem'}}>
+                            <div style={{display: 'flex', flexDirection:'column'}}>
+                                <div className="input-heading">
+                                    <i className="fas fa-suitcase"></i>
+                                    <p>Specialization</p>
+                                </div>
+                                <input onChange={(e) => handle(e)} type="text" placeholder="Specialization" id="email" name="speciality" />
+                            </div>
+                            <div style={{display: 'flex', flexDirection:'column'}}>
+                                <div className="input-heading">
+                                    <i className="fas fa-key"></i>
+                                    <p>License No.</p>
+                                </div>
+                                <input onChange={(e) => handle(e)} type="text" placeholder="License No." id="email" name="licenseno" />
+                            </div>
                         </div>
-                        <input onChange={(e) => handle(e)} type="text" placeholder="Speciality" id="email" name="speciality" />
-                    </div>}
+                    }
 
                     <div className="input-div">
                         <div className="input-heading">
@@ -100,8 +112,8 @@ const Signup = () => {
                     <Link style={{ marginLeft: "4px", color: "black", textDecoration: "underline" }} to='/login'>Log In.</Link>
                 </p>
 
-            </form>
-        </div>
+            </form >
+        </div >
 
     )
 }

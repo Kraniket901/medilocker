@@ -142,10 +142,6 @@ const MyProfile = () => {
               <input type="button" value="Save" onClick={save} className="bg-cyan-400 text-white font-medium p-3" />
             </div>
 
-            <div className="py-2">
-              <input type="button" value="Show" onClick={show} className="bg-cyan-400 text-white font-medium p-3" />
-            </div>
-
           </form>
         </div>
 
