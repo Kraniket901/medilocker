@@ -2,24 +2,24 @@ import React, { useState, Fragment } from "react";
 import { nanoid } from "nanoid";
 import Web3 from "web3";
 import Navbar from "../components/Navbar";
-import Sidebar from "../components/Sidebar";
 import Footer from "../components/Footer";
+import Sidebar from "../components/Sidebar";
 import contract from "../contracts/cruds.json";
 import { useCookies } from "react-cookie";
 
-const Allergies = () => {
+const MedicalHistory = () => {
   const [cookies, setCookie] = useCookies();
 
   const [addFormData, setAddFormData] = useState({
-    name: "",
-    type: "",
-    medication: "",
+    disease: "",
+    time: "",
+    solved: "",
   });
 
   const [editFormData, setEditFormData] = useState({
-    name: "",
-    type: "",
-    medication: "",
+    disease: "",
+    time: "",
+    solved: "",
   });
 
   const [editContactId, setEditContactId] = useState(null);
@@ -127,16 +127,16 @@ const Allergies = () => {
           var data = JSON.parse(res[i]);
           // console.log(data['mail']);
           if (data["mail"] === cookies["mail"]) {
-            data["allergies"].push(addFormData);
+            data["medicalhistory"].push(addFormData);
 
             mycontract.methods
               .updateData(parseInt(cookies["index"]), JSON.stringify(data))
               .send({ from: currentaddress })
               .then(() => {
-                alert("Allgery Saved");
-                var data = cookies["allergies"];
+                alert("Medical History Saved");
+                var data = cookies["medicalhistory"];
                 data.push(addFormData);
-                setCookie("allergies", data);
+                setCookie("medicalhistory", data);
               })
               .catch((err) => {
                 console.log(err);
@@ -149,59 +149,9 @@ const Allergies = () => {
   }
 
   async function show() {
-    cookies["allergies"].map((data) => {
+    cookies["medicalhistory"].map((data) => {
       console.log(data);
     });
-  }
-
-  function resetCook(data) {
-    var list = [];
-    for (let j = 1; j < data.length; j++) {
-      list.push(data[j]);
-    }
-    setCookie("allergies", list);
-  }
-
-  async function del(policy) {
-    var accounts = await window.ethereum.request({
-      method: "eth_requestAccounts",
-    });
-    var currentaddress = accounts[0];
-
-    const web3 = new Web3(window.ethereum);
-    const mycontract = new web3.eth.Contract(
-      contract["abi"],
-      contract["networks"]["5777"]["address"]
-    );
-
-    mycontract.methods.getdata().call().then(res => {
-      res.map(data => {
-        data = JSON.parse(data);
-        if (data['type'] === 'patient' && data['mail'] === cookies['mail']) {
-          var list = data['insurance'];
-          var updateList = []
-
-          for (let i = 0; i < list.length; i++) {
-            if (list[i]['policyNo'] !== policy) {
-              updateList.push(list[i]);
-            }
-          }
-
-          data['insurance'] = updateList;
-
-          mycontract.methods.updateData(cookies['index'], JSON.stringify(data))
-            .send({ from: currentaddress })
-            .then(() => {
-              alert("Removed");
-              resetCook(updateList)
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-          return;
-        }
-      })
-    })
   }
 
   return (
@@ -219,61 +169,55 @@ const Allergies = () => {
           <Navbar />
         </div>
         <div
-          style={{ display: "flex", flexDirection: "column", padding: "4rem", justifyContent: "center", alignItems: "flex-end", gap: "4rem" }}
+          style={{ display: "flex", flexDirection: "column", padding: "4rem", justifyContent: "center", alignItems:"flex-end", gap:"4rem" }}
         >
-          <form style={{ width: "100%" }}>
+          <form style={{width:"100%"}}>
             <table style={{ borderCollapse: "collapse" }}>
               <thead>
                 <tr>
-                  <th className="">Name</th>
-                  <th className="">Type</th>
-                  <th className="">Medication Required</th>
-                  <th className="">Actions</th>
+                  <th className="">Disease</th>
+                  <th className="">Diagnosed Date</th>
+                  <th className="">Status</th>
                 </tr>
               </thead>
               <tbody>
-                {cookies["allergies"].map((allergy) => (
+                {cookies["medicalhistory"].map((mh) => (
                   <tr>
-                    <td>{allergy.name}</td>
-                    <td>{allergy.type}</td>
-                    <td>{allergy.medication}</td>
-                    <td>
-                      <input type="button" value="Delete" onClick={() => del(allergy.name)} />
-                    </td>
+                    <td>{mh.disease}</td>
+                    <td>{mh.time}</td>
+                    <td>{mh.solved}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </form>
 
-          <form style={{
-            display: 'flex', flexDirection: 'column', gap: '1rem',
-            backgroundColor: 'rgb(3, 201, 215)',
-            justifyContent: 'center',
-            alignItems: 'center',
-            padding: '24px',
-            borderRadius: '20px',
-          }}>
-            <h2>Add an Allergy</h2>
+          <form style={{display:'flex', flexDirection:'column', gap:'1rem',
+    backgroundColor: 'rgb(3, 201, 215)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '24px',
+    borderRadius: '20px',}}>
+            <h2>Add your Medical History</h2>
             <input
               type="text"
-              name="name"
+              name="disease"
               required="required"
-              placeholder="Name"
+              placeholder="Disease"
               onChange={handleAddFormChange}
             />
             <input
               type="text"
-              name="type"
+              name="time"
               required="required"
-              placeholder="Type"
+              placeholder="Diagnosed Date"
               onChange={handleAddFormChange}
             />
             <input
               type="text"
-              name="medication"
+              name="solved"
               required="required"
-              placeholder="Medication Required"
+              placeholder="Treated/Ongoing"
               onChange={handleAddFormChange}
             />
             <input type="button" value="Save" onClick={submit} />
@@ -285,4 +229,4 @@ const Allergies = () => {
   );
 };
 
-export default Allergies;
+export default MedicalHistory;

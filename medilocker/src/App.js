@@ -4,7 +4,7 @@ import { FiSettings } from 'react-icons/fi';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 
 import { Navbar, Footer, Sidebar, ThemeSettings } from './components';
-import { Home, MyProfile, MyProfileDoc, Doctors, Patients, Insurance, Allergies, Login, Signup, Orders, Calendar, Employees, Stacked, Pyramid, Customers, Kanban, Line, Area, Bar, Pie, Financial, ColorPicker, ColorMapping, Editor } from './pages';
+import { Home, MyProfile, MyProfileDoc, Doctors, Visits, Patients, MedicalHistory, HospitalizationHistory, Insurance, Allergies, PredictDisease, Login, Signup, Orders, Calendar, Employees, Stacked, Pyramid, Customers, Kanban, Line, Area, Bar, Pie, Financial, ColorPicker, ColorMapping, Editor } from './pages';
 import PatientInfo from './pages/PatientInfo';
 import './App.css';
 
@@ -39,6 +39,10 @@ const App = () => {
                 <Route path="/customers" element={<Customers />} />
                 <Route path="/insurance" element={<Insurance />} />
                 <Route path="/allergies" element={<Allergies />} />
+                <Route path="/medicalhistory" element={<MedicalHistory />} />
+                <Route path="/hospitalizationhistory" element={<HospitalizationHistory />} />
+                <Route path="/predictdisease" element={<PredictDisease />} />
+                <Route path="/checkuphistory" element={<Visits />} />
                 <Route path="/doctors" element={<Doctors />} />
                 <Route path="/patients" element={<Patients />} />
                 <Route exact path="/patientData/:mail" element={<PatientInfo />} />

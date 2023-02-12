@@ -7,7 +7,7 @@ import { FaAllergies } from 'react-icons/fa';
 import { BiColorFill } from 'react-icons/bi';
 import { IoDocumentOutline} from 'react-icons/io5';
 import { RiContactsLine, RiStockLine } from 'react-icons/ri';
-import { MdOutlineSupervisorAccount , MdOutlineMedicalServices} from 'react-icons/md';
+import { MdOutlineMeetingRoom, MdOutlineSupervisorAccount , MdOutlineMedicalServices, MdMedicalServices} from 'react-icons/md';
 import { HiOutlineRefresh } from 'react-icons/hi';
 import { TiTick } from 'react-icons/ti';
 import { GiLouvrePyramid } from 'react-icons/gi';
@@ -492,6 +492,18 @@ export const links = [
       {
         name: 'allergies',
         icon: <FaAllergies />,
+      },
+      {
+        name: 'medical history',
+        icon: <MdOutlineMedicalServices />,
+      },
+      {
+        name: 'hospitalization history',
+        icon: <MdMedicalServices />,
+      },
+      {
+        name: 'checkup history',
+        icon: <MdOutlineMeetingRoom/>,
       }
     ],
   },
@@ -504,6 +516,15 @@ export const links = [
       },
     ],
   },
+  {
+    title: 'Feeling Low?',
+    links: [
+      {
+        name: 'predict disease',
+        icon: <MdOutlineMedicalServices />,
+      }
+    ]
+  }
 ];
 
 export const cartData = [

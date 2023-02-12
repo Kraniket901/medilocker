@@ -12,13 +12,14 @@ const MyProfileDoc = () => {
   const [name, setName] = React.useState(cookies['name']);
   const [email, setEmail] = React.useState(cookies['mail']);
   const [password, setPassword] = React.useState(cookies['password']);
+  const [licenseno, setLicenseno] = React.useState(cookies['licenseno']);
   // const [acceptedTerms, setAcceptedTerms] = React.useState(false);
 
   const [auth, setAuth] = useState({
     "type": "user",
     "name": name,
     "mail": email,
-    "password": password
+    "password": password,
   })
 
   const [disabled, setDisabled] = useState(true);
@@ -31,6 +32,7 @@ const MyProfileDoc = () => {
     setCookie("name", name);
     setCookie("mail", email);
     setCookie("password", password);
+    setCookie("licenseno",licenseno);
     var accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
     var currentaddress = accounts[0];
 
@@ -121,6 +123,21 @@ const MyProfileDoc = () => {
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  disabled={disabled}
+                  required />
+              </label >
+              <input type="button" value="✎" onClick={handleGameClick}></input>
+            </div>
+
+            <div className="py-2">
+              <label className="text-black">
+                License No.:
+                <input
+                  style={{ padding: "10px", margin: "10px" }}
+                  name="licenseno"
+                  type="number"
+                  value={licenseno}
+                  onChange={(e) => setLicenseno(e.target.value)}
                   disabled={disabled}
                   required />
               </label >

@@ -106,6 +106,8 @@ const Insurance = () => {
     setContacts(newContacts);
   };
 
+
+
   async function submit() {
     var accounts = await window.ethereum.request({
       method: "eth_requestAccounts",
@@ -141,7 +143,6 @@ const Insurance = () => {
               .catch((err) => {
                 console.log(err);
               });
-
             break;
           }
         }
@@ -152,6 +153,56 @@ const Insurance = () => {
     cookies["insurance"].map((data) => {
       console.log(data);
     });
+  }
+
+  function resetCook(data) {
+    var list = [];
+    for (let j = 1; j < data.length; j++) {
+      list.push(data[j]);
+    }
+    setCookie("insurance", list);
+  }
+
+  async function del(policy) {
+    var accounts = await window.ethereum.request({
+      method: "eth_requestAccounts",
+    });
+    var currentaddress = accounts[0];
+
+    const web3 = new Web3(window.ethereum);
+    const mycontract = new web3.eth.Contract(
+      contract["abi"],
+      contract["networks"]["5777"]["address"]
+    );
+
+    mycontract.methods.getdata().call().then(res => {
+      res.map(data => {
+        data = JSON.parse(data);
+        if (data['type'] === 'patient' && data['mail'] === cookies['mail']) {
+          var list = data['insurance'];
+          var updateList = []
+
+          for (let i = 0; i < list.length; i++) {
+            if (list[i]['policyNo'] !== policy) {
+              updateList.push(list[i]);
+            }
+          }
+
+          data['insurance'] = updateList;
+
+          mycontract.methods.updateData(cookies['index'], JSON.stringify(data))
+            .send({ from: currentaddress })
+            .then(() => {
+              alert("Removed");
+              resetCook(updateList)
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+          return;
+        }
+      })
+    })
   }
 
   return (
@@ -169,15 +220,16 @@ const Insurance = () => {
           <Navbar />
         </div>
         <div
-          style={{ display: "flex", flexDirection: "column", padding: "4rem", justifyContent: "center", alignItems:"flex-end", gap:"4rem" }}
+          style={{ display: "flex", flexDirection: "column", padding: "4rem", justifyContent: "center", alignItems: "flex-end", gap: "4rem" }}
         >
-          <form style={{width:"100%"}}>
+          <form style={{ width: "100%" }}>
             <table style={{ borderCollapse: "collapse" }}>
               <thead>
                 <tr>
                   <th className="">Policy Number</th>
                   <th className="">Company</th>
                   <th className="">Expiry</th>
+                  <th className="">Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -186,18 +238,23 @@ const Insurance = () => {
                     <td>{contact.policyNo}</td>
                     <td>{contact.company}</td>
                     <td>{contact.expiry}</td>
+                    <td>
+                      <input type="button" value="Delete" onClick={() => del(contact.policyNo)} />
+                    </td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </form>
 
-          <form style={{display:'flex', flexDirection:'column', gap:'1rem',
-    backgroundColor: 'rgb(3, 201, 215)',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: '24px',
-    borderRadius: '20px',}}>
+          <form style={{
+            display: 'flex', flexDirection: 'column', gap: '1rem',
+            backgroundColor: 'rgb(3, 201, 215)',
+            justifyContent: 'center',
+            alignItems: 'center',
+            padding: '24px',
+            borderRadius: '20px',
+          }}>
             <h2>Add an Insurance</h2>
             <input
               type="text"
