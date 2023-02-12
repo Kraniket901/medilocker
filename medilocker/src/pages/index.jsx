@@ -1,6 +1,10 @@
 export { default as Home } from './Home';
 export { default as MyProfile } from './MyProfile';
+export { default as MyProfileDoc } from './MyProfileDoc';
+export { default as Doctors } from './Doctors';
+export { default as Patients } from './Patients';
 export { default as Insurance } from './Insurance';
+export { default as Allergies } from './Allergies';
 export { default as Signup } from './Signup';
 export { default as Login } from './Login';
 export { default as Kanban } from './Kanban';

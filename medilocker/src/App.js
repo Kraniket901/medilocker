@@ -4,7 +4,8 @@ import { FiSettings } from 'react-icons/fi';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 
 import { Navbar, Footer, Sidebar, ThemeSettings } from './components';
-import { Home, MyProfile, Insurance, Login, Signup, Orders, Calendar, Employees, Stacked, Pyramid, Customers, Kanban, Line, Area, Bar, Pie, Financial, ColorPicker, ColorMapping, Editor } from './pages';
+import { Home, MyProfile, MyProfileDoc, Doctors, Patients, Insurance, Allergies, Login, Signup, Orders, Calendar, Employees, Stacked, Pyramid, Customers, Kanban, Line, Area, Bar, Pie, Financial, ColorPicker, ColorMapping, Editor } from './pages';
+import PatientInfo from './pages/PatientInfo';
 import './App.css';
 
 import { useStateContext } from './contexts/ContextProvider';
@@ -28,6 +29,7 @@ const App = () => {
                 {/* dashboard  */}
                 <Route path="/" element={(<Home />)} />
                 <Route path="/myprofile" element={(<MyProfile />)} />
+                <Route path="/myprofiledoc" element={(<MyProfileDoc />)} />
                 <Route path="/login" element={(<Login />)} />
                 <Route path="/signup" element={(<Signup />)} />
 
@@ -36,6 +38,10 @@ const App = () => {
                 <Route path="/employees" element={<Employees />} />
                 <Route path="/customers" element={<Customers />} />
                 <Route path="/insurance" element={<Insurance />} />
+                <Route path="/allergies" element={<Allergies />} />
+                <Route path="/doctors" element={<Doctors />} />
+                <Route path="/patients" element={<Patients />} />
+                <Route exact path="/patientData/:mail" element={<PatientInfo />} />
 
                 {/* apps  */}
                 <Route path="/kanban" element={<Kanban />} />

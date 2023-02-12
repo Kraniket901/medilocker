@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import Web3 from "web3";
 import contract from "../contracts/cruds.json";
@@ -6,7 +6,11 @@ import { useCookies } from "react-cookie";
 import "./Login.css";
 
 const Login = () => {
+    const [doctors, setDoc] = useState([]);
+    const [patients, setPatient] = useState([]);
+
     const [log, setLog] = useState({
+        type: "patient",
         mail: "",
         password: "",
     });
@@ -19,8 +23,77 @@ const Login = () => {
         setLog(newData);
     }
 
+    async function loadDoctors() {
+        var accounts = await window.ethereum.request({
+            method: "eth_requestAccounts",
+        });
+        var currentaddress = accounts[0];
+
+        const web3 = new Web3(window.ethereum);
+        const mycontract = new web3.eth.Contract(
+            contract["abi"],
+            contract["networks"]["5777"]["address"]
+        );
+
+        mycontract.methods
+            .getdata()
+            .call()
+            .then(res => {
+                res.map(data => {
+                    data = JSON.parse(data);
+                    if (data['type'] === 'doctor') {
+                        doctors.push(data);
+                    }
+                })
+                setCookie('doctors', doctors);
+            })
+    }
+
+    async function loadPatients() {
+        var accounts = await window.ethereum.request({
+            method: "eth_requestAccounts",
+        });
+        var currentaddress = accounts[0];
+
+        const web3 = new Web3(window.ethereum);
+        const mycontract = new web3.eth.Contract(
+            contract["abi"],
+            contract["networks"]["5777"]["address"]
+        );
+
+        mycontract.methods
+            .getdata()
+            .call()
+            .then(res => {
+                res.map(data => {
+                    data = JSON.parse(data);
+                    if (data['type'] === 'patient') {
+                        let result = data.hasOwnProperty('selectedDoctors');
+                        if (result) {
+                            var list = data['selectedDoctors'];
+
+                            console.log(list);
+                            for (let j = 0; j < list.length; j++) {
+                                if (list[j] === log['mail']) {
+                                    patients.push(data);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                })
+                setCookie('patients', patients);
+            })
+    }
+
     async function login() {
         console.log(log);
+        if (log['type'] === 'patient') {
+            loadDoctors();
+        }
+        if (log['type'] === 'doctor') {
+            loadPatients();
+        }
         var accounts = await window.ethereum.request({
             method: "eth_requestAccounts",
         });
@@ -39,20 +112,56 @@ const Login = () => {
                 let flag = 0;
                 for (let i = 0; i < res.length; i++) {
                     const d = JSON.parse(res[i]);
-                    if (d["type"] === "user") {
-                        if (d["mail"] === log["mail"]) {
-                            flag = 1;
-                            if (d["password"] === log["password"]) {
+
+                    if (d['mail'] === log['mail']) {
+                        flag = 1;
+                        if (d['password'] === log['password']) {
+                            if (d['type'] === 'patient' && d['type'] === log['type']) {
                                 setCookie("index", i);
                                 setCookie("mail", d["mail"]);
                                 setCookie("name", d["name"]);
                                 setCookie("password", d["password"]);
                                 setCookie("insurance", d["insurance"]);
+                                setCookie("allergies", d["allergies"]);
+                                setCookie("type", d["type"]);
+
+                                // mycontract.methods
+                                //     .getdata()
+                                //     .call()
+                                //     .then(result => {
+                                //         result.map(data => {
+                                //             data = JSON.parse(data);
+                                //             if (data['type'] === 'doctor') {
+                                //                 // console.log(cookies['doctors']);
+                                //                 if (cookies['doctors'] === 'undefined') {
+                                //                     var list = [];
+                                //                     list.push(data)
+                                //                     setCookie("doctors", list);
+                                //                 }
+                                //                 else {
+                                //                     var list = cookies['doctors'];
+                                //                     list.push(data);
+                                //                     setCookie('doctors', list);
+                                //                 }
+                                //             }
+                                //         })
+                                //     })
+
+                                // console.log(cookies['doctors']);
                                 window.location.href = "/myprofile";
-                            } else {
-                                alert("wrong password");
-                                break;
                             }
+                            else if (d['type'] === 'doctor' && d['type'] === log['type']) {
+                                setCookie("index", i);
+                                setCookie("mail", d["mail"]);
+                                setCookie("name", d["name"]);
+                                setCookie("password", d["password"]);
+                                setCookie("type", d["type"]);
+                                window.location.href = "/myprofiledoc";
+                            }
+                        }
+                        else {
+                            alert("wrong password");
+                            break;
                         }
                     }
                 }
@@ -63,7 +172,30 @@ const Login = () => {
             });
     }
 
-    
+    async function show() {
+        var accounts = await window.ethereum.request({
+            method: "eth_requestAccounts",
+        });
+        var currentaddress = accounts[0];
+
+        const web3 = new Web3(window.ethereum);
+        const mycontract = new web3.eth.Contract(
+            contract["abi"],
+            contract["networks"]["5777"]["address"]
+        );
+
+        mycontract.methods
+            .getdata()
+            .call()
+            .then(res => {
+                res.map(d => {
+                    console.log(JSON.parse(d));
+                })
+            })
+
+    }
+
+
 
     return (
         <div className="login-container bg-gradient-to-r from-cyan-500 to-blue-500 via-teal-200 ">
@@ -100,6 +232,17 @@ const Login = () => {
                             name="password"
                         />
                     </div>
+                    <div className="input-div">
+                        <div className="input-heading" style={{ margin: "1rem 0", }}>
+                            <i className="fas fa-key"></i>
+                            <h5>User Type</h5>
+                            <select id="user-type" name="type" onChange={(e) => handle(e)}>
+                                <option value="patient">Patient</option>
+                                <option value="doctor">Doctor</option>
+                            </select>
+                        </div>
+
+                    </div>
 
                     <p style={{ textAlign: "right" }}>Forgot password?</p>
                 </div>
@@ -110,7 +253,13 @@ const Login = () => {
                     value="Log In"
                     onClick={login}
                 />
-                
+                <input
+                    type="button"
+                    className="btn"
+                    value="Show"
+                    onClick={show}
+                />
+
                 <p style={{ textAlign: "right" }}>Don't have an account?
                     <Link style={{ marginLeft: "4px", color: "black", textDecoration: "underline" }} to='/signup'>Sign Up.</Link>
                 </p>

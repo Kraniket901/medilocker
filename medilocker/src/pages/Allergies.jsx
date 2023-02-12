@@ -2,24 +2,24 @@ import React, { useState, Fragment } from "react";
 import { nanoid } from "nanoid";
 import Web3 from "web3";
 import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import Sidebar from "../components/Sidebar";
+import Footer from "../components/Footer";
 import contract from "../contracts/cruds.json";
 import { useCookies } from "react-cookie";
 
-const Insurance = () => {
+const Allergies = () => {
   const [cookies, setCookie] = useCookies();
 
   const [addFormData, setAddFormData] = useState({
-    company: "",
-    policyNo: "",
-    expiry: "",
+    name: "",
+    type: "",
+    medication: "",
   });
 
   const [editFormData, setEditFormData] = useState({
-    company: "",
-    policyNo: "",
-    expiry: "",
+    name: "",
+    type: "",
+    medication: "",
   });
 
   const [editContactId, setEditContactId] = useState(null);
@@ -127,16 +127,16 @@ const Insurance = () => {
           var data = JSON.parse(res[i]);
           // console.log(data['mail']);
           if (data["mail"] === cookies["mail"]) {
-            data["insurance"].push(addFormData);
+            data["allergies"].push(addFormData);
 
             mycontract.methods
               .updateData(parseInt(cookies["index"]), JSON.stringify(data))
               .send({ from: currentaddress })
               .then(() => {
-                alert("Insurance Saved");
-                var data = cookies["insurance"];
+                alert("Allgery Saved");
+                var data = cookies["allergies"];
                 data.push(addFormData);
-                setCookie("insurance", data);
+                setCookie("allergies", data);
               })
               .catch((err) => {
                 console.log(err);
@@ -149,7 +149,7 @@ const Insurance = () => {
   }
 
   async function show() {
-    cookies["insurance"].map((data) => {
+    cookies["allergies"].map((data) => {
       console.log(data);
     });
   }
@@ -175,17 +175,17 @@ const Insurance = () => {
             <table style={{ borderCollapse: "collapse" }}>
               <thead>
                 <tr>
-                  <th className="">Policy Number</th>
-                  <th className="">Company</th>
-                  <th className="">Expiry</th>
+                  <th className="">Name</th>
+                  <th className="">Type</th>
+                  <th className="">Medication Required</th>
                 </tr>
               </thead>
               <tbody>
-                {cookies["insurance"].map((contact) => (
+                {cookies["allergies"].map((allergy) => (
                   <tr>
-                    <td>{contact.policyNo}</td>
-                    <td>{contact.company}</td>
-                    <td>{contact.expiry}</td>
+                    <td>{allergy.name}</td>
+                    <td>{allergy.type}</td>
+                    <td>{allergy.medication}</td>
                   </tr>
                 ))}
               </tbody>
@@ -198,26 +198,26 @@ const Insurance = () => {
     alignItems: 'center',
     padding: '24px',
     borderRadius: '20px',}}>
-            <h2>Add an Insurance</h2>
+          <h2>Add an Allergy</h2>
             <input
               type="text"
-              name="company"
+              name="name"
               required="required"
-              placeholder="Company"
+              placeholder="Name"
               onChange={handleAddFormChange}
             />
             <input
               type="text"
-              name="policyNo"
+              name="type"
               required="required"
-              placeholder="Policy No."
+              placeholder="Type"
               onChange={handleAddFormChange}
             />
             <input
               type="text"
-              name="expiry"
+              name="medication"
               required="required"
-              placeholder="Expiry Date"
+              placeholder="Medication Required"
               onChange={handleAddFormChange}
             />
             <input type="button" value="Save" onClick={submit} />
@@ -229,4 +229,4 @@ const Insurance = () => {
   );
 };
 
-export default Insurance;
+export default Allergies;
