@@ -1,13 +1,13 @@
 import React from "react";
 import { useState } from 'react';
 import Navbar from "../components/Navbar";
-import Sidebar from "../components/Sidebar";
+import Sidebar2 from "../components/Sidebar2";
 import Footer from "../components/Footer";
 import { useCookies } from 'react-cookie';
 import Web3 from "web3";
 import contract from '../contracts/cruds.json';
 
-const MyProfile = () => {
+const MyProfileDoc = () => {
   const [cookies, setCookie] = useCookies();
   const [name, setName] = React.useState(cookies['name']);
   const [email, setEmail] = React.useState(cookies['mail']);
@@ -63,7 +63,7 @@ const MyProfile = () => {
   return (
     <div className="flex relative dark:bg-main-dark-bg">
       <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-white ">
-        <Sidebar />
+        <Sidebar2 />
       </div>
 
       <div
@@ -112,7 +112,6 @@ const MyProfile = () => {
             </div>
 
 
-
             <div className="py-2">
               <label className="text-black">
                 Password:
@@ -131,11 +130,6 @@ const MyProfile = () => {
             <div className="py-2">
               <input type="button" value="Save" onClick={save} className="bg-cyan-400 text-white font-medium p-3" />
             </div>
-
-            <div className="py-2">
-              <input type="button" value="Show" onClick={show} className="bg-cyan-400 text-white font-medium p-3" />
-            </div>
-
           </form>
         </div>
 
@@ -145,4 +139,4 @@ const MyProfile = () => {
   );
 };
 
-export default MyProfile;
+export default MyProfileDoc;

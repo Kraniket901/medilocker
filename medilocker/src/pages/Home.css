@@ -280,7 +280,7 @@ body.dark-theme {
   background-color: var(--first-color);
   color: #1a1a1a;
   padding: 0.75rem 1.5rem;
-  border-radius: 3rem;
+  border-radius: 8px;
   font-weight: var(--font-semi-bold);
   transition: 0.3s;
 }
@@ -574,9 +574,7 @@ body.dark-theme {
 /* Table Starts here */
 table {
   border-collapse: collapse;
-  width: 90%;
-  margin-left: auto;
-  margin-right: auto;
+  width: 100%;
   margin-top: 4rem;
   height: 150px;
   border: 1px solid #bdc3c7;
