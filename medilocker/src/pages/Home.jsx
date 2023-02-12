@@ -10,6 +10,9 @@ import sthetoscope from "../data/stethoscope.png";
 import down from "../data/upload.svg";
 import user from "../data/user.svg";
 import tick from "../data/tick.svg";
+import store from "../data/store.png";
+import doc from "../data/doc.svg";
+import dissease from "../data/dissease.png";
 import member1 from "../data/1.png";
 import member2 from "../data/2.png";
 
@@ -42,8 +45,8 @@ const Home = () => {
                 </a>
               </li>
               <li className="nav__item">
-                <a href="#team" className="nav__link">
-                  Team
+                <a href="#services" className="nav__link">
+                  Services
                 </a>
               </li> */}
               <li className="nav__item">
@@ -63,7 +66,7 @@ const Home = () => {
             <i className="bx bx-grid-alt"></i>
           </div>
           <div style={{ display: "flex" }}>
-            <Link to="/login" className="buttoni button__header log">
+            <Link to="/login" className="button button__header log">
               Log In
             </Link>
             <Link to="/signup" className="button button__header">
