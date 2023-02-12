@@ -6,11 +6,13 @@ import contract from '../contracts/cruds.json';
 
 const Signup = () => {
     const [reg, setReg] = useState({
-        "type": "user",
+        "type": "patient",
         "name": "",
         "mail": "",
         "password": "",
-        "insurance": [{}]
+        "insurance": [{}],
+        "allergies": [{}],
+        "selectedDoctors": [{}]
     });
 
     function handle(e) {
@@ -20,6 +22,7 @@ const Signup = () => {
     }
 
     async function register() {
+        console.log(reg);
         var accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
         var currentaddress = accounts[0];
 
@@ -49,8 +52,19 @@ const Signup = () => {
                             <h5>Username</h5>
                         </div>
                         <input name="name" onChange={(e) => handle(e)} id="name" placeholder="Full Name" />
+                    </div>
+                    <div className="input-div">
+                        <div className="input-heading" style={{margin:"1rem 0",}}>
+                            <i className="fas fa-key"></i>
+                            <h5>User Type</h5>
+                            <select id="user-type" name="type" onChange={(e) => handle(e)}>
+                                <option value="patient">Patient</option>
+                                <option value="doctor">Doctor</option>
+                            </select>
+                        </div>
 
                     </div>
+
                     <div className="input-div">
                         <div className="input-heading">
                             <i className="fas fa-envelope"></i>
@@ -60,6 +74,16 @@ const Signup = () => {
 
 
                     </div>
+
+                    { reg.type==="doctor" &&
+                    <div className="input-div">
+                        <div className="input-heading">
+                            <i className="fas fa-envelope"></i>
+                            <h5>Speciality</h5>
+                        </div>
+                        <input onChange={(e) => handle(e)} type="text" placeholder="Speciality" id="email" name="speciality" />
+                    </div>}
+
                     <div className="input-div">
                         <div className="input-heading">
                             <i className="fas fa-lock"></i>

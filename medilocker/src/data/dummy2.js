@@ -1,13 +1,12 @@
 import React from 'react';
-import {  AiOutlineShoppingCart, AiOutlineAreaChart, AiOutlineBarChart, AiOutlineStock } from 'react-icons/ai';
-import {  FiEdit, FiPieChart, FiBarChart, FiCreditCard, FiStar, FiShoppingCart } from 'react-icons/fi';
-import { BsBarChart, BsBoxSeam, BsCurrencyDollar, BsShield, BsChatLeft } from 'react-icons/bs';
-import { CgProfile } from 'react-icons/cg';
-import { FaAllergies } from 'react-icons/fa';
+import { AiOutlineCalendar, AiOutlineShoppingCart, AiOutlineAreaChart, AiOutlineBarChart, AiOutlineStock } from 'react-icons/ai';
+import { FiShoppingBag, FiEdit, FiPieChart, FiBarChart, FiCreditCard, FiStar, FiShoppingCart } from 'react-icons/fi';
+import { BsKanban, BsBarChart, BsBoxSeam, BsCurrencyDollar, BsShield, BsChatLeft } from 'react-icons/bs';
 import { BiColorFill } from 'react-icons/bi';
-import { IoDocumentOutline} from 'react-icons/io5';
+import { CgProfile } from 'react-icons/cg';
+import { IoMdContacts } from 'react-icons/io';
 import { RiContactsLine, RiStockLine } from 'react-icons/ri';
-import { MdOutlineSupervisorAccount , MdOutlineMedicalServices} from 'react-icons/md';
+import { MdOutlineSupervisorAccount, MdOutlineMedicalServices } from 'react-icons/md';
 import { HiOutlineRefresh } from 'react-icons/hi';
 import { TiTick } from 'react-icons/ti';
 import { GiLouvrePyramid } from 'react-icons/gi';
@@ -476,30 +475,16 @@ export const links = [
     title: 'Dashboard',
     links: [
       {
-        name: 'my profile',
+        name: 'my profile doc',
         icon: <CgProfile />,
       },
     ],
   },
-  
   {
-    title: 'Health Records',
+    title: 'My Patients',
     links: [
       {
-        name: 'insurance',
-        icon: <IoDocumentOutline />,
-      },
-      {
-        name: 'allergies',
-        icon: <FaAllergies />,
-      }
-    ],
-  },
-  {
-    title: 'Available Doctors',
-    links: [
-      {
-        name: 'doctors',
+        name: 'patients',
         icon: <MdOutlineMedicalServices />,
       },
     ],
